@@ -10,6 +10,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JFrame;
 
 public class LoginFrame extends javax.swing.JFrame {
 
@@ -17,15 +18,18 @@ public class LoginFrame extends javax.swing.JFrame {
      * Creates new form LoginFrame
      */
     
+    
     static AudioInputStream audioInputStream;
     static Clip clip;
     static boolean soundOn;
     public LoginFrame() {
-        
+        this.setResizable(false);
+        this.soundOn = false;
         try {
             initComponents();
             audioInputStream = AudioSystem.getAudioInputStream(new File("sound.wav"));
             clip = AudioSystem.getClip( );
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (LineUnavailableException | UnsupportedAudioFileException | IOException ex) {
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -116,7 +120,6 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSoundMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSoundMouseClicked
-
         try{
             if(btnSound.getText().equals("No Sound")){
                 //clip.stop();
@@ -144,10 +147,10 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void btnStartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStartMouseClicked
         // TODO add your handling code here:
-        newPlayerName pname = new newPlayerName();
-        pname.setLocationRelativeTo(null);
-        pname.setVisible(true);
         this.setVisible(false);
+        newPlayerName f_playername = new newPlayerName();
+        f_playername.setLocationRelativeTo(null);
+        f_playername.setVisible(true);
     }//GEN-LAST:event_btnStartMouseClicked
 
     /**

@@ -19,26 +19,27 @@ public class panelGame extends javax.swing.JPanel {
     game gameSpace;
     BufferedImage jpg;
     public String namaPlayer;
-    Timer t;
+    static Timer tmr;
+    static Boolean exitGame;
     float ctrWaktu;
     int ctrTembak;
     
     public panelGame() {
         initComponents();
         this.setFocusable(true);
+        exitGame = false;
         try {
             jpg = ImageIO.read(new File("images/bg2.jpg"));
         } catch (IOException ex) {
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        gameSpace = new game("winda", 1);
+        gameSpace = new game("game 1", 1);
         gameSpace.setPlayer(new pesawatPlayer(5, 1));
         randomMusuh();
         for (pesawat p : gameSpace.listMusuh) {
             ((pesawatMusuh)p).tmrTembak = (int)(Math.random()*35) + 20;
         }
-        t = new Timer(50, new ActionListener() {
+        tmr = new Timer(50, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 for (pesawat p : gameSpace.listMusuh) {
@@ -78,7 +79,7 @@ public class panelGame extends javax.swing.JPanel {
             }
         });
         
-        t.start();
+        tmr.start();
     }
     
     public void nextStage(){
@@ -102,6 +103,12 @@ public class panelGame extends javax.swing.JPanel {
         }
         if(tabrak != null){
             gameSpace.listMusuh.remove(tabrak);
+        }
+    }
+    
+    public void checkExitGame(){
+        if (exitGame) {
+            this.setVisible(false);
         }
     }
     
@@ -130,7 +137,7 @@ public class panelGame extends javax.swing.JPanel {
                         if(tembak != false){
                             JOptionPane.showMessageDialog(null, "Game Over");
                             gameSpace.player = null;
-                            t.stop();
+                            tmr.stop();
                             break;
                         }
                     }
@@ -182,6 +189,8 @@ public class panelGame extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnPause = new javax.swing.JButton();
+
         setPreferredSize(new java.awt.Dimension(500, 500));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -189,15 +198,28 @@ public class panelGame extends javax.swing.JPanel {
             }
         });
 
+        btnPause.setText("Pause");
+        btnPause.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPauseMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(425, Short.MAX_VALUE)
+                .addComponent(btnPause)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnPause)
+                .addContainerGap(464, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -211,10 +233,35 @@ public class panelGame extends javax.swing.JPanel {
         else if(evt.getKeyCode() == KeyEvent.VK_SPACE){
             ((pesawatPlayer)gameSpace.getPlayer()).shoot();
         }
+        else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            setPauseGame();
+        }
         repaint();
     }//GEN-LAST:event_formKeyPressed
 
+    private void btnPauseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPauseMouseClicked
+        // TODO add your handling code here:
+        setPauseGame();    
+        
+    }//GEN-LAST:event_btnPauseMouseClicked
 
+    private void setPauseGame(){
+        if (tmr.isRunning()) {
+            tmr.stop();
+            formMenuInGame ingameMenu = new formMenuInGame();
+            ingameMenu.setLocationRelativeTo(null);
+            ingameMenu.setVisible(true);
+        }
+//        else{
+//            tmr.start();
+//            btnPause.setText("Pause");
+//            btnPause.setFocusable(false);
+//        }
+    }
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPause;
     // End of variables declaration//GEN-END:variables
 }

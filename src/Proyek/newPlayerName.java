@@ -91,9 +91,10 @@ public class newPlayerName extends javax.swing.JFrame {
         if (!nama.equals("") && nama.length() >= 3) {
             this.setVisible(false);
             namaPlayer = nama;
-            formGameSpace fg = new formGameSpace();
-            fg.setLocationRelativeTo(null);
-            fg.setVisible(true);
+            formGameSpace f_game = new formGameSpace();
+            f_game.setVisible(true);
+            f_game.setLocationRelativeTo(null);
+            formMenuInGame.f_game = f_game;
         }
         else{
             JOptionPane.showMessageDialog(null, "player's name must at least be 3 characters long");
