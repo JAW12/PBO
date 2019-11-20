@@ -34,7 +34,8 @@ public class panelGame extends javax.swing.JPanel {
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         gameSpace = new game("game 1", 1);
-        gameSpace.setPlayer(new pesawatPlayer(5, 1));
+        gameSpace.setPlayer(new pesawatSingleShooter(5, 1));
+        
         randomMusuh();
         for (pesawat p : gameSpace.listMusuh) {
             ((pesawatMusuh)p).tmrTembak = (int)(Math.random()*35) + 20;

@@ -11,10 +11,10 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 public class peluru {
-    protected int damage, posX, posY, mX, mY, fireRate, width, height;
+    protected int damage, posX, posY, mX, mY, width, height;
     BufferedImage gbrTembak;
 
-    public peluru(int damage, int posX, int posY, int mX, int mY, int fireRate, int width, int height) {
+    public peluru(int damage, int posX, int posY, int mX, int mY, int width, int height) {
         try {
             this.gbrTembak = ImageIO.read(new File("images/laser.png"));
         } catch (IOException ex) {
@@ -25,7 +25,6 @@ public class peluru {
         this.posY = posY;
         this.mX = mX;
         this.mY = mY;
-        this.fireRate = fireRate;
         this.width = width;
         this.height = height;
     }
@@ -68,14 +67,6 @@ public class peluru {
 
     public void setmY(int mY) {
         this.mY = mY;
-    }
-
-    public int getFireRate() {
-        return fireRate;
-    }
-
-    public void setFireRate(int fireRate) {
-        this.fireRate = fireRate;
     }
     
     public Rectangle bounds(){

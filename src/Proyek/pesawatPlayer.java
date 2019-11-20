@@ -39,9 +39,10 @@ public class pesawatPlayer extends pesawat{
         this.shooterCount = shooterCount;
     }
     
+    @Override
     public void shoot(){
         for (int i = 0; i < shooterCount; i++) {
-            listPeluru.add(new peluru(1, posX + (width / 2) - 3, posY-2, 7, 7, 1, 7, 10));
+            listPeluru.add(new peluru(1, posX + (width / 2) - 3, posY-2, 7, 7, 7, 10));
         }
     }
 
