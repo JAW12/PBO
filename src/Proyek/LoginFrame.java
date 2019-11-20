@@ -217,7 +217,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 } catch (LineUnavailableException | IOException ex) {
                     Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                }
+            }
                 clip.start( );
         }
         else{

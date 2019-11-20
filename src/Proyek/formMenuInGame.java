@@ -15,6 +15,7 @@ public class formMenuInGame extends javax.swing.JFrame {
     static formGameSpace f_game;
     public formMenuInGame() {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setSoundGame();
     }
 
@@ -192,11 +193,11 @@ public class formMenuInGame extends javax.swing.JFrame {
     
     public void setSoundGame(){
         if (LoginFrame.soundOn) {
-            btnSetSound.setText("Sound : on");
+            btnSetSound.setText("Sound : off");
             LoginFrame.soundEffect(true);
         }
         else{
-            btnSetSound.setText("Sound : off");
+            btnSetSound.setText("Sound : on");
             LoginFrame.soundEffect(false);
         }
     }
