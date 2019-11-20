@@ -16,6 +16,17 @@ public class formMenuInGame extends javax.swing.JFrame {
     public formMenuInGame() {
         initComponents();
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+    @Override
+    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+        if (JOptionPane.showConfirmDialog(null, 
+            "Are you sure you want to close this window?", "Close Window?", 
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+            setResumePause();
+        }
+    }
+    });
         setSoundGame();
     }
 
@@ -199,6 +210,13 @@ public class formMenuInGame extends javax.swing.JFrame {
         else{
             btnSetSound.setText("Sound : on");
             LoginFrame.soundEffect(false);
+        }
+    }
+    
+    public void setResumePause(){
+        this.setVisible(false);
+        if (!panelGame.tmr.isRunning()) {
+            panelGame.tmr.start();
         }
     }
     

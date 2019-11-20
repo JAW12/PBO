@@ -5,7 +5,12 @@
  */
 package Proyek;
 
+import java.awt.Desktop;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -21,11 +26,11 @@ public class panelIntro extends javax.swing.JPanel {
     public panelIntro() {
         initComponents();
         this.setFocusable(true);
-        Media media = new Media("videos/intro.mp4");
-        //Media mediaLoad = new Media("videos/load screen.mp4");
-        mplayerIntro = new MediaPlayer(media);
-        //mplayerLoad = new MediaPlayer(mediaLoad);
-        mplayerIntro.setAutoPlay(true);
+//        Media media = new Media("videos/intro.mp4");
+//        //Media mediaLoad = new Media("videos/load screen.mp4");
+//        mplayerIntro = new MediaPlayer(media);
+//        //mplayerLoad = new MediaPlayer(mediaLoad);
+//        mplayerIntro.setAutoPlay(true);
         
     }
     
@@ -67,11 +72,20 @@ public class panelIntro extends javax.swing.JPanel {
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            mplayerIntro.stop();
-            this.setVisible(false);
-            LoginFrame lp = new LoginFrame();
-            lp.setLocationRelativeTo(null);
-            lp.setVisible(true);    
+            try {
+                //            mplayerIntro.stop();
+//            this.setVisible(false);
+//            LoginFrame lp = new LoginFrame();
+//            lp.setLocationRelativeTo(null);
+//            lp.setVisible(true);    
+
+            File f = new File("videos/intro.mp4");
+            Desktop d = Desktop.getDesktop();
+            d.open(f);
+            
+            } catch (IOException ex) {
+                Logger.getLogger(panelIntro.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_formKeyPressed
 

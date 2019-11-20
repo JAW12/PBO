@@ -5,6 +5,16 @@
  */
 package Proyek;
 
+import java.awt.Desktop;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Timer;
+
 /**
  *
  * @author Winda AU
@@ -14,8 +24,58 @@ public class formIntro extends javax.swing.JFrame {
     /**
      * Creates new form formIntro
      */
+    int ctrWaktu;
+    Boolean introDone;
+    Timer t;
     public formIntro() {
-        initComponents();
+        try {
+            initComponents();
+            ctrWaktu = 0;
+            introDone = false;
+            File f = new File("videos/intro.mp4");
+            Desktop d = Desktop.getDesktop();
+            d.open(f);
+            
+            t = new Timer(1000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    if (ctrWaktu >= 5) {
+                        lblSkip.setVisible(true);
+                    }
+                    else{
+                        lblSkip.setVisible(false);
+                    }
+                    
+                    checkIntroDone();
+                    System.out.println("waktu : " + ctrWaktu);
+                }
+            });
+            t.start();
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(formIntro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
+    
+    private void showMainMenu(){
+        this.setVisible(false);
+        LoginFrame login = new LoginFrame();
+        login.setLocationRelativeTo(null);
+        login.setVisible(true);
+    }
+    
+    private void checkIntroDone(){
+        if (ctrWaktu >= 5) {
+            t.stop();
+            showMainMenu();
+        } 
+        else{
+            ctrWaktu++;
+        }
     }
 
     /**
@@ -28,33 +88,59 @@ public class formIntro extends javax.swing.JFrame {
     private void initComponents() {
 
         panelIntro1 = new Proyek.panelIntro();
+        lblSkip = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelIntro1Layout = new javax.swing.GroupLayout(panelIntro1);
         panelIntro1.setLayout(panelIntro1Layout);
         panelIntro1Layout.setHorizontalGroup(
             panelIntro1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 915, Short.MAX_VALUE)
+            .addGap(0, 31, Short.MAX_VALUE)
         );
         panelIntro1Layout.setVerticalGroup(
             panelIntro1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
+            .addGap(0, 31, Short.MAX_VALUE)
         );
+
+        lblSkip.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        lblSkip.setText("PRESS SPACE TO SKIP VIDEO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelIntro1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelIntro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSkip)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelIntro1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelIntro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(lblSkip)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            showMainMenu();
+        }
+    }//GEN-LAST:event_formKeyPressed
 
     /**
      * @param args the command line arguments
@@ -92,6 +178,7 @@ public class formIntro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblSkip;
     private Proyek.panelIntro panelIntro1;
     // End of variables declaration//GEN-END:variables
 }
