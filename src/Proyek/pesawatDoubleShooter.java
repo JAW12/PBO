@@ -13,7 +13,7 @@ public class pesawatDoubleShooter extends pesawatPlayer{
     
     public pesawatDoubleShooter(int hp, int fireRate) {
         super(hp, fireRate);
-        this.shooterCount = 1;
+        this.shooterCount = 3;
     }
     
 }
