@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 public abstract class pesawat {
     protected int hp, posX, posY, mX, mY, width, height;
     BufferedImage gbrPesawat;
+    protected int damagePesawat, damageNabrak;
 
     public pesawat(int hp, int posX, int posY) {
         this.hp = hp;

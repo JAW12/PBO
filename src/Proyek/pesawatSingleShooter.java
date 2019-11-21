@@ -15,5 +15,10 @@ public class pesawatSingleShooter extends pesawatPlayer{
         super(hp, fireRate);
         this.shooterCount = 1;
     }
+
+    @Override
+    public pesawatPlayer evolve() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

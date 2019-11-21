@@ -11,7 +11,22 @@ import javax.imageio.ImageIO;
 public class pesawatMusuh extends pesawat{
     
     protected ArrayList<peluru> listPeluru;
-    int tmrTembak;
+    protected int tmrTembak;
+    protected int jenisPesawat, jenisPowerUp;
+    /*
+    jenisPowerUp (tipe data : integer)
+    	0 = extra life (HP += 20)
+    	1 = shield
+    	2 = evolve
+    	3 = damage (damagePesawat += 20)
+    	4 – 15 = no power up
+
+    jenisPesawat (tipe data : integer)
+    	1 = gerak lurus biasa
+    	2 = gerak zig zag (mulai dari kiri, apabila kena ujung layar mantul ke arah berlawanan)
+    	3 = gerak zig zag (mulai dari kanan, apabila kena ujung layar mantul ke arah berlawanan)
+    */
+    
     public pesawatMusuh(int hp) {
         super(hp, 0, 5);
         try {

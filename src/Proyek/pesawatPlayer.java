@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
-public class pesawatPlayer extends pesawat{
+public abstract class pesawatPlayer extends pesawat{
     /*
     1 = single shooter
     2 = double shooter
@@ -17,8 +17,10 @@ public class pesawatPlayer extends pesawat{
     protected boolean shieldActive;
     protected ArrayList<peluru> listPeluru;
     
+    
     public pesawatPlayer(int hp, int fireRate) {
         super(hp, 200, 425);
+        this.damagePesawat = 20;
         this.mX = 5;
         //awal game dimulai pasti dia cuma bisa nembak 1x dan ga punya shield
         this.shooterCount = 1; 
@@ -42,7 +44,7 @@ public class pesawatPlayer extends pesawat{
     @Override
     public void shoot(){
         for (int i = 0; i < shooterCount; i++) {
-            listPeluru.add(new peluru(1, posX + (width / 2) - 3, posY-2, 7, 7, 7, 10));
+            listPeluru.add(new peluru(damagePesawat, posX + (width / 2) - 3, posY-2, 7, 7, 7, 10));
         }
     }
 
@@ -61,6 +63,23 @@ public class pesawatPlayer extends pesawat{
     public void setListPeluru(ArrayList<peluru> listPeluru) {
         this.listPeluru = listPeluru;
     }
+
+    public int getDamageNabrak() {
+        return damageNabrak;
+    }
+
+    public void setDamageNabrak(int damageNabrak) {
+        this.damageNabrak = damageNabrak;
+    }
     
+    public void setDamageNabrak(int damageNabrak, int extraLife) {
+        this.damageNabrak = damageNabrak + extraLife;
+    }
+    
+    public void powerUp(int jenisPowerUp){
+        
+    }
+    
+    public abstract pesawatPlayer evolve();
     
 }

@@ -99,7 +99,7 @@ public class panelGame extends javax.swing.JPanel {
         pesawat tabrak = null;
         for(pesawat p : gameSpace.listMusuh){
             if(gameSpace.getPlayer().bounds().intersects(p.bounds())){
-            tabrak = p;
+                tabrak = p;
             }
         }
         if(tabrak != null){
