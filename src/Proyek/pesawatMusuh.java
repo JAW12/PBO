@@ -40,6 +40,8 @@ public class pesawatMusuh extends pesawat{
         this.posY = rnd.nextInt(500 + 1) - 500;
     }
     
+    
+    
     @Override
     public void shoot(){
         listPeluru.add(new peluru(1, posX + (width / 2) - 3, posY+height, 7, -9, 7, 10));    
