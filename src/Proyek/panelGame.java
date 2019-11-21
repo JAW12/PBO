@@ -16,8 +16,9 @@ import javax.swing.Timer;
 
 public class panelGame extends javax.swing.JPanel {
 
+    
     game gameSpace;
-    BufferedImage jpg;
+    
     public String namaPlayer;
     static Timer tmr;
     static Boolean exitGame;
@@ -28,15 +29,9 @@ public class panelGame extends javax.swing.JPanel {
         initComponents();
         this.setFocusable(true);
         exitGame = false;
-        try {
-            jpg = ImageIO.read(new File("images/bg2.jpg"));
-        } catch (IOException ex) {
-            Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        gameSpace = new game("game 1", 1);
-        gameSpace.setPlayer(new pesawatSingleShooter(5, 1));
         
-        randomMusuh();
+        
+        newGame();
         for (pesawat p : gameSpace.listMusuh) {
             ((pesawatMusuh)p).tmrTembak = (int)(Math.random()*35) + 20;
         }
@@ -66,16 +61,14 @@ public class panelGame extends javax.swing.JPanel {
                 }
                 
                 ctrWaktu+= 0.05;
-                if (ctrWaktu >= 10) {
-//                    randomMusuh();
-//                    System.out.println("keluar musuh di " + ctrWaktu);
-                    nextStage();
+                if (ctrWaktu >= 10) { //setiap 10 detik
+                    gameSpace.nextStage();
                     System.out.println("pura - pura stage bertambah menjadi : " + gameSpace.getStage());
                     ctrWaktu = 0;
                 }
-                tabrak();
-                nembak();
-                ketembak();
+                gameSpace.tabrak();
+                gameSpace.nembak();
+                gameSpace.ketembak();
                 repaint();
             }
         });
@@ -83,28 +76,10 @@ public class panelGame extends javax.swing.JPanel {
         tmr.start();
     }
     
-    public void nextStage(){
-        gameSpace.setStage(gameSpace.getStage() + 1);
-        randomMusuh();
-    }
-    
-    public void randomMusuh(){
-        int rand = (int)(Math.random() * 15) + 3;
-        for(int i =0; i < rand; i++){
-            gameSpace.addMusuh(new pesawatMusuh(3));
-        }
-    }
-    
-    public void tabrak(){
-        pesawat tabrak = null;
-        for(pesawat p : gameSpace.listMusuh){
-            if(gameSpace.getPlayer().bounds().intersects(p.bounds())){
-                tabrak = p;
-            }
-        }
-        if(tabrak != null){
-            gameSpace.listMusuh.remove(tabrak);
-        }
+    private void newGame(){
+        gameSpace = new game(newPlayerName.namaPlayer, 1, LoginFrame.mode);
+        gameSpace.setPlayer(new pesawatSingleShooter(5, 1));
+        gameSpace.randomMusuh();
     }
     
     public void checkExitGame(){
@@ -113,72 +88,10 @@ public class panelGame extends javax.swing.JPanel {
         }
     }
     
-    public void nembak(){
-        pesawat tembak = null;
-        for(peluru pewpew : ((pesawatPlayer)gameSpace.player).listPeluru){
-            for(pesawat p : gameSpace.listMusuh){
-                if(pewpew.bounds().intersects(p.bounds())){
-                    tembak = p;
-                }
-            }
-            if(tembak != null){
-                gameSpace.listMusuh.remove(tembak);
-            }
-        }
-    }
-    
-    public void ketembak(){
-            boolean tembak = false;
-            for (pesawat p : gameSpace.listMusuh) {
-                for(peluru pewpew : ((pesawatMusuh)p).listPeluru){
-                    if(gameSpace.player != null){
-                        if(pewpew.bounds().intersects(gameSpace.player.bounds())){
-                            tembak = true;
-                        }
-                        if(tembak != false){
-                            JOptionPane.showMessageDialog(null, "Game Over");
-                            gameSpace.player = null;
-                            tmr.stop();
-                            break;
-                        }
-                    }
-                    else{
-                        break;
-                    }
-                }
-                if(gameSpace.player == null){
-                    break;
-                }
-            }
-    }
-
     @Override
     protected void paintComponent(Graphics grphcs) {
         super.paintComponent(grphcs); 
-        Graphics2D g2 = (Graphics2D)grphcs;
-        java.awt.Font f = new java.awt.Font("ARIAL", java.awt.Font.BOLD, 15);
-        g2.setFont(f);
-        g2.drawString(newPlayerName.namaPlayer, 0, 5);
-        
-        g2.drawImage(jpg,0,0,500,500,null);
-        g2.drawRect(1, 0, 500, 500);
-        
-        if(gameSpace.player != null){
-            gameSpace.getPlayer().draw(grphcs);    
-        }
-        for (pesawat p : gameSpace.getListMusuh()) {
-            p.draw(grphcs);
-        }
-        if(gameSpace.player != null){
-            for (peluru p : ((pesawatPlayer)gameSpace.getPlayer()).getListPeluru()){
-                p.draw(grphcs);
-            }
-        }
-        for (pesawat p : gameSpace.listMusuh) {
-            for (peluru pl : ((pesawatMusuh)p).listPeluru){
-                pl.draw(grphcs);
-            }
-        }
+        gameSpace.drawGame(grphcs);
     }
     
     /**
@@ -253,11 +166,6 @@ public class panelGame extends javax.swing.JPanel {
             ingameMenu.setLocationRelativeTo(null);
             ingameMenu.setVisible(true);
         }
-//        else{
-//            tmr.start();
-//            btnPause.setText("Pause");
-//            btnPause.setFocusable(false);
-//        }
     }
     
     

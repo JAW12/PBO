@@ -16,11 +16,12 @@ public abstract class pesawatPlayer extends pesawat{
     protected int shooterCount;
     protected boolean shieldActive;
     protected ArrayList<peluru> listPeluru;
-    
+    protected int damageNabrak;
     
     public pesawatPlayer(int hp, int fireRate) {
         super(hp, 200, 425);
         this.damagePesawat = 20;
+        this.damageNabrak = 50;
         this.mX = 5;
         //awal game dimulai pasti dia cuma bisa nembak 1x dan ga punya shield
         this.shooterCount = 1; 

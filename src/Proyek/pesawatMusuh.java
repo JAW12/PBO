@@ -27,23 +27,46 @@ public class pesawatMusuh extends pesawat{
     	3 = gerak zig zag (mulai dari kanan, apabila kena ujung layar mantul ke arah berlawanan)
     */
     
-    public pesawatMusuh(int hp) {
+//    public pesawatMusuh(int hp) {
+//        super(hp, 0, 5);
+//        try {
+//            this.gbrPesawat = ImageIO.read(new File("images/enemy.png"));
+//            this.listPeluru = new ArrayList<>();
+//        } catch (IOException ex) {
+//            Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Random rnd = new Random();
+//        this.posX = rnd.nextInt(400 - 40 + 1) + 40;
+//        this.posY = rnd.nextInt(500 + 1) - 500;
+//    }
+    
+    
+    /*
+    keterangan difficulty :
+    1 = easy
+    2 = medium
+    3 = hard    
+    */
+    public pesawatMusuh(int hp, int difficulty) {
         super(hp, 0, 5);
+        if (difficulty >= 1 && difficulty <= 3) {
+            this.damagePesawat *= difficulty;
+        }
+        Random rnd = new Random();
+        this.posX = rnd.nextInt(400 - 40 + 1) + 40;
+        this.posY = rnd.nextInt(500 + 1) - 500;
+        
         try {
             this.gbrPesawat = ImageIO.read(new File("images/enemy.png"));
             this.listPeluru = new ArrayList<>();
         } catch (IOException ex) {
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Random rnd = new Random();
-        this.posX = rnd.nextInt(400 - 40 + 1) + 40;
-        this.posY = rnd.nextInt(500 + 1) - 500;
     }
-    
     
     
     @Override
     public void shoot(){
-        listPeluru.add(new peluru(1, posX + (width / 2) - 3, posY+height, 7, -9, 7, 10));    
+        listPeluru.add(new peluru(damagePesawat, posX + (width / 2) - 3, posY+height, 7, -9, 7, 10));    
     }
 }

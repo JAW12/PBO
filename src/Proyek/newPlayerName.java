@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Proyek;
 
 import javax.swing.JOptionPane;
@@ -91,9 +86,10 @@ public class newPlayerName extends javax.swing.JFrame {
         if (!nama.equals("") && nama.length() >= 3) {
             this.setVisible(false);
             namaPlayer = nama;
+            
             formGameSpace f_game = new formGameSpace();
-            f_game.setVisible(true);
             f_game.setLocationRelativeTo(null);
+            f_game.setVisible(true);
             formMenuInGame.f_game = f_game;
         }
         else{

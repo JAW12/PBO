@@ -16,17 +16,19 @@ public class formMenuInGame extends javax.swing.JFrame {
     public formMenuInGame() {
         initComponents();
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        
         this.addWindowListener(new java.awt.event.WindowAdapter() {
-    @Override
-    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-        if (JOptionPane.showConfirmDialog(null, 
-            "Are you sure you want to close this window?", "Close Window?", 
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+        @Override
+        public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+//            if (JOptionPane.showConfirmDialog(null, 
+//                "Are you sure you want to close this window?", "Close Window?", 
+//                JOptionPane.YES_NO_OPTION,
+//                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+//                
+//            }
             setResumePause();
         }
-    }
-    });
+        });
         setSoundGame();
     }
 
@@ -40,10 +42,11 @@ public class formMenuInGame extends javax.swing.JFrame {
     private void initComponents() {
 
         btnSetSound = new javax.swing.JButton();
-        btnBackToMain = new javax.swing.JButton();
+        btnSaveGame = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnExitGame = new javax.swing.JButton();
         btnResume = new javax.swing.JButton();
+        btnBackToMain1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -59,10 +62,10 @@ public class formMenuInGame extends javax.swing.JFrame {
             }
         });
 
-        btnBackToMain.setText("Back to main menu");
-        btnBackToMain.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnSaveGame.setText("Save Current Game");
+        btnSaveGame.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBackToMainMouseClicked(evt);
+                btnSaveGameMouseClicked(evt);
             }
         });
 
@@ -88,41 +91,49 @@ public class formMenuInGame extends javax.swing.JFrame {
             }
         });
 
+        btnBackToMain1.setText("Back to Main Menu");
+        btnBackToMain1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBackToMain1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(63, 63, 63)
-                            .addComponent(btnExitGame, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnResume, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSetSound, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnBackToMain, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(52, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnExitGame, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jLabel1)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                        .addComponent(btnResume, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnSetSound, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSaveGame, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBackToMain1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnResume, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(btnSetSound, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnResume, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSetSound, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnBackToMain, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBackToMain1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(btnSaveGame, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(btnExitGame, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -142,30 +153,39 @@ public class formMenuInGame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnResumeMouseClicked
 
-    private void btnBackToMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackToMainMouseClicked
+    private void btnSaveGameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveGameMouseClicked
         // TODO add your handling code here:
-        this.setVisible(false);
-        f_game.setVisible(false);
-        LoginFrame login = new LoginFrame();
-        login.setLocationRelativeTo(null);
-        login.setVisible(true);
-    }//GEN-LAST:event_btnBackToMainMouseClicked
+        
+    }//GEN-LAST:event_btnSaveGameMouseClicked
 
     private void btnExitGameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitGameMouseClicked
-        // TODO add your handling code here:
+        //struktur message box sementara kayak gini, boleh diubah
         int n = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit game?", "Exit Game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (n == JOptionPane.YES_OPTION) {
-            System.exit(0);
+            int n2 = JOptionPane.showConfirmDialog(null, "Do you want to save current game?", "Exit Game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (n2 == JOptionPane.YES_OPTION) { //save game
+                
+            }
+            
+            System.exit(0); //keluar dari program
         }
     }//GEN-LAST:event_btnExitGameMouseClicked
-
-    private void btnResumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResumeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnResumeActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosed
+
+    private void btnBackToMain1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackToMain1MouseClicked
+        // TODO add your handling code here:
+        int n = JOptionPane.showConfirmDialog(null, "Do you want to save current game?", "Exit Game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (n == JOptionPane.YES_OPTION) { //save game
+            
+        }
+    }//GEN-LAST:event_btnBackToMain1MouseClicked
+
+    private void btnResumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResumeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnResumeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,11 +240,20 @@ public class formMenuInGame extends javax.swing.JFrame {
         }
     }
     
+    public void showMainMenu(){
+        this.setVisible(false);
+        f_game.setVisible(false);
+        LoginFrame login = new LoginFrame();
+        login.setLocationRelativeTo(null);
+        login.setVisible(true);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBackToMain;
+    private javax.swing.JButton btnBackToMain1;
     private javax.swing.JButton btnExitGame;
     private javax.swing.JButton btnResume;
+    private javax.swing.JButton btnSaveGame;
     private javax.swing.JButton btnSetSound;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

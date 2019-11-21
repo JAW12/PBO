@@ -18,7 +18,7 @@ public class LoginFrame extends javax.swing.JFrame {
      * Creates new form LoginFrame
      */
     
-    
+    static int mode;
     static AudioInputStream audioInputStream;
     static Clip clip;
     static boolean soundOn;
@@ -147,6 +147,20 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void btnStartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStartMouseClicked
         // TODO add your handling code here:
+        switch (cbMode.getSelectedIndex()) {
+            case 0:
+                mode = 1;
+                break;
+            case 1:
+                mode = 2;
+                break;
+            case 2:
+                mode = 3;
+                break;
+            default:
+                break;
+        }
+        
         this.setVisible(false);
         newPlayerName f_playername = new newPlayerName();
         f_playername.setLocationRelativeTo(null);
