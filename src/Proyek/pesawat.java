@@ -59,13 +59,37 @@ public abstract class pesawat {
     public void setmY(int mY) {
         this.mY = mY;
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getDamagePesawat() {
+        return damagePesawat;
+    }
+
+    public void setDamagePesawat(int damagePesawat) {
+        this.damagePesawat = damagePesawat;
+    }
     
     public void draw(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
         g2.drawImage(gbrPesawat, posX, posY, width, height, null);
     }
     
-    public void move(String keyMove){
+    public void movePlayer(String keyMove){
         if (keyMove.toUpperCase().equals("A")) {
             if (this.posX - mX > 0) {
                 this.posX -= mX;
@@ -76,13 +100,10 @@ public abstract class pesawat {
                 this.posX += mX;
             }
         }
-        else if (keyMove.toUpperCase().equals("")) {
-            //untuk gerak musuh yang semakin lama semakin ke arah player
-            if (this.posY + height + mY < 500) {
-                
-            }
-            this.posY += mY;
-        }
+    }
+    
+    public void moveMusuh(){
+        this.posY += mY;
     }
     
     public Rectangle bounds(){

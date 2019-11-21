@@ -1,6 +1,5 @@
 package Proyek;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -10,7 +9,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.JFrame;
+import javax.swing.JButton;
 
 public class LoginFrame extends javax.swing.JFrame {
 
@@ -33,7 +32,7 @@ public class LoginFrame extends javax.swing.JFrame {
         } catch (LineUnavailableException | UnsupportedAudioFileException | IOException ex) {
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        setButtonSound(btnSound);
     }
 
     /**
@@ -120,29 +119,8 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSoundMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSoundMouseClicked
-        try{
-            if(btnSound.getText().equals("No Sound")){
-                //clip.stop();
-                btnSound.setText("Sound");
-                soundOn = false;
-            }
-            else {
-                /*
-                if (!clip.isOpen()) {
-                    clip.open(audioInputStream);
-                }
-                clip.start( );
-                */
-                btnSound.setText("No Sound");
-                soundOn = true;
-            }
-            soundEffect(soundOn);
-        }
-        catch(Exception ex)
-        {
-            System.out.println("Error with playing sound.");
-            ex.printStackTrace( );
-        }
+        soundOn = !soundOn;
+        setButtonSound(btnSound);
     }//GEN-LAST:event_btnSoundMouseClicked
 
     private void btnStartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStartMouseClicked
@@ -223,16 +201,34 @@ public class LoginFrame extends javax.swing.JFrame {
         }
     }
     
+    public void setButtonSound(JButton b){
+        try{
+            if(soundOn){
+                btnSound.setText("No Sound");
+            }
+            else {
+                btnSound.setText("Sound");
+            }
+            soundEffect(soundOn);
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace( );
+        }
+    }
+    
     static void soundEffect(boolean on){
         if (on) {
             if (!clip.isOpen()) {
                 try {
                     clip.open(audioInputStream);
+                    clip.loop(Clip.LOOP_CONTINUOUSLY);
                 } catch (LineUnavailableException | IOException ex) {
                     Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-                clip.start( );
+            clip.start();
         }
         else{
             clip.stop();

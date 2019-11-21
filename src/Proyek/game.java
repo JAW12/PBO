@@ -1,12 +1,15 @@
 package Proyek;
 
 import static Proyek.panelGame.tmr;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -18,8 +21,7 @@ public class game {
     protected int stage, difficultyLevel;
     protected ArrayList<pesawat> listMusuh;
     protected pesawat player;
-    public newPlayerName f_promptNama;
-    BufferedImage jpg;
+    protected BufferedImage jpg;
     
     public game(String nama,int stage, int difficulty) {
         this.nama = nama;
@@ -94,8 +96,28 @@ public class game {
     public void randomMusuh(){
         int rand = (int)(Math.random() * 15) + 3;
         for(int i =0; i < rand; i++){
-            this.addMusuh(new pesawatMusuh(100 + 5 * this.getStage(), this.getDifficultyLevel()));
+            this.addMusuh();
         }
+    }
+    
+    public Boolean isPosXNumpuk(pesawat currentPesawat){
+        Boolean numpuk = false;
+        for (pesawat p : listMusuh) {
+            if (currentPesawat.getPosX() == p.getPosX() || currentPesawat.getPosX() + currentPesawat.width == p.posX) {
+                numpuk = true;
+            }
+        }
+        return numpuk;
+    }
+    
+    public void addMusuh(){
+        Random rnd = new Random();
+        int jenisPesawat = rnd.nextInt(3 - 1 + 1) + 1;
+        pesawatMusuh pmusuh = new pesawatMusuh(100 + 5 * this.getStage(), this.getDifficultyLevel(), jenisPesawat);
+        do {
+            pmusuh.setRandomPosX();
+        } while (isPosXNumpuk(pmusuh));
+        this.listMusuh.add(pmusuh);
     }
     
     public void tabrak(){
@@ -133,9 +155,9 @@ public class game {
                             tembak = true;
                         }
                         if(tembak != false){
-                            JOptionPane.showMessageDialog(null, "Game Over");
-                            this.player = null;
-                            tmr.stop();
+                            //JOptionPane.showMessageDialog(null, "Game Over");
+                            //this.player = null;
+                            //tmr.stop();
                             break;
                         }
                     }
@@ -151,12 +173,14 @@ public class game {
     
     public void drawGame(Graphics grphcs){
         Graphics2D g2 = (Graphics2D)grphcs;
-        java.awt.Font f = new java.awt.Font("ARIAL", java.awt.Font.BOLD, 15);
-        g2.setFont(f);
-        g2.drawString(newPlayerName.namaPlayer, 0, 5);
-        
         g2.drawImage(jpg,0,0,500,500,null);
-        g2.drawRect(1, 0, 500, 500);
+        Font f = new Font("ARIAL",Font.BOLD, 17);
+        g2.setFont(f);
+        g2.setColor(Color.WHITE);
+        g2.drawString("Player : " + newPlayerName.namaPlayer, 5, 30);
+        g2.drawString("Score  : " + this.score, 5, 60);
+        g2.drawString("Hp : " + this.player.getHp(), 5, 90);
+        g2.drawString("Stage : " + this.stage, 330, 30);
         
         if(this.player != null){
             this.getPlayer().draw(grphcs);    
@@ -172,6 +196,27 @@ public class game {
         for (pesawat p : this.listMusuh) {
             for (peluru pl : ((pesawatMusuh)p).listPeluru){
                 pl.draw(grphcs);
+            }
+        }
+    }
+    
+    public Boolean isMelewatiLayar(pesawat p){
+        Boolean lewat = false;
+        if (p.getPosX() + p.getWidth() >= 540) {
+            lewat = true;
+        }
+        
+        if (p.getPosY() + p.getHeight() >= 540) {
+            lewat = true;
+        }
+        
+        return lewat;
+    }
+    
+    public void checkPesawatMelewatiLayar(){
+        for (int i = 0; i < this.listMusuh.size(); i++) {
+            if (isMelewatiLayar(this.listMusuh.get(i))) {
+                this.listMusuh.remove(i);
             }
         }
     }
