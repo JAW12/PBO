@@ -173,7 +173,7 @@ public class game {
     
     public void drawGame(Graphics grphcs){
         Graphics2D g2 = (Graphics2D)grphcs;
-        g2.drawImage(jpg,0,0,500,500,null);
+        g2.drawImage(jpg,0,0,550,550,null);
         Font f = new Font("ARIAL",Font.BOLD, 17);
         g2.setFont(f);
         g2.setColor(Color.WHITE);
