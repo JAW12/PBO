@@ -180,7 +180,7 @@ public class game {
         g2.drawString("Player : " + newPlayerName.namaPlayer, 5, 30);
         g2.drawString("Score  : " + this.score, 5, 60);
         g2.drawString("Hp : " + this.player.getHp(), 5, 90);
-        g2.drawString("Stage : " + this.stage, 330, 30);
+        g2.drawString("Stage : " + this.stage, 325, 30);
         
         if(this.player != null){
             this.getPlayer().draw(grphcs);    
