@@ -48,11 +48,11 @@ public class pesawatMusuh extends pesawat{
                     break;
                 case 2:
                     this.posX = 5;
-                    this.gbrPesawat = ImageIO.read(new File("images/enemy.png"));
+                    this.gbrPesawat = ImageIO.read(new File("images/enemyBlue1.png"));
                     break;
                 case 3:
                     this.posX = 480 - width;
-                    this.gbrPesawat = ImageIO.read(new File("images/enemy.png"));
+                    this.gbrPesawat = ImageIO.read(new File("images/enemyRed1.png"));
                     break;
                 default:
                     break;
