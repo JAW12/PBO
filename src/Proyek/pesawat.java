@@ -4,10 +4,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
-public abstract class pesawat {
+public abstract class pesawat implements Serializable{
     protected int hp, posX, posY, mX, mY, width, height;
-    BufferedImage gbrPesawat;
+    transient BufferedImage gbrPesawat;
     protected int damagePesawat;
 
     public pesawat(int hp, int posX, int posY) {

@@ -1,7 +1,10 @@
 package Proyek;
 
+import static Proyek.newPlayerName.namaPlayer;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
@@ -10,6 +13,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class LoginFrame extends javax.swing.JFrame {
 
@@ -64,6 +68,11 @@ public class LoginFrame extends javax.swing.JFrame {
 
         btnLoad.setBackground(java.awt.SystemColor.windowBorder);
         btnLoad.setText("Load Game");
+        btnLoad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadActionPerformed(evt);
+            }
+        });
 
         btnSound.setText("Sound");
         btnSound.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -144,6 +153,35 @@ public class LoginFrame extends javax.swing.JFrame {
         f_playername.setLocationRelativeTo(null);
         f_playername.setVisible(true);
     }//GEN-LAST:event_btnStartMouseClicked
+
+    private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
+        try{
+            FileInputStream fisp = new FileInputStream("simpan.txt");
+            ObjectInputStream baca = new ObjectInputStream(fisp);
+            game gg = (game) baca.readObject(); 
+            formGameSpace f_game = new formGameSpace(gg);
+            f_game.setLocationRelativeTo(null);
+            f_game.setVisible(true);
+            formMenuInGame.f_game = f_game;
+            baca.close(); fisp.close();
+        }
+        catch(Exception ex){
+            System.out.println("gagal karena : " + ex);
+        }
+        /*String nama = txtNama.getText();
+        if (!nama.equals("") && nama.length() >= 3) {
+            this.setVisible(false);
+            namaPlayer = nama;
+            
+            formGameSpace f_game = new formGameSpace();
+            f_game.setLocationRelativeTo(null);
+            f_game.setVisible(true);
+            formMenuInGame.f_game = f_game;
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "player's name must at least be 3 characters long");
+        }*/
+    }//GEN-LAST:event_btnLoadActionPerformed
 
     /**
      * @param args the command line arguments

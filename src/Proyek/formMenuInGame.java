@@ -1,5 +1,7 @@
 package Proyek;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -12,6 +14,8 @@ public class formMenuInGame extends javax.swing.JFrame {
     /**
      * Creates new form formMenuInGame
      */
+    game terimaGame;
+    
     static formGameSpace f_game;
     public formMenuInGame() {
         initComponents();
@@ -66,6 +70,11 @@ public class formMenuInGame extends javax.swing.JFrame {
         btnSaveGame.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSaveGameMouseClicked(evt);
+            }
+        });
+        btnSaveGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveGameActionPerformed(evt);
             }
         });
 
@@ -187,6 +196,18 @@ public class formMenuInGame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnResumeActionPerformed
 
+    private void btnSaveGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveGameActionPerformed
+        try{
+            FileOutputStream fisp = new FileOutputStream("simpan.txt");
+            ObjectOutputStream save_player = new ObjectOutputStream(fisp);
+            save_player.writeObject(terimaGame); 
+            save_player.close(); fisp.close();
+        }
+        catch(Exception ex){
+            System.out.println("gagal karena " + ex);
+        }
+    }//GEN-LAST:event_btnSaveGameActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -257,4 +278,8 @@ public class formMenuInGame extends javax.swing.JFrame {
     private javax.swing.JButton btnSetSound;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    void kirim(game gameSpace) {
+        terimaGame = gameSpace;
+    }
 }

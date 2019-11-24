@@ -9,8 +9,8 @@ package Proyek;
  *
  * @author Winda AU
  */
-public class pesawatDoubleShooter extends pesawatPlayer{
-    
+public class pesawatDoubleShooter extends pesawatPlayer {
+
     public pesawatDoubleShooter(int hp, int fireRate) {
         super(hp, fireRate);
         this.shooterCount = 3;
@@ -20,5 +20,5 @@ public class pesawatDoubleShooter extends pesawatPlayer{
     public pesawatPlayer evolve() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

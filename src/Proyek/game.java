@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
@@ -15,13 +16,13 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
-public class game {
+public class game implements Serializable{
     protected String nama;
     protected int score;
     protected int stage, difficultyLevel;
     protected ArrayList<pesawat> listMusuh;
     protected pesawat player;
-    protected BufferedImage jpg;
+    protected transient BufferedImage jpg;
     
     public game(String nama,int stage, int difficulty) {
         this.nama = nama;
@@ -37,6 +38,9 @@ public class game {
         }
     }
 
+    public game getMe(){
+        return this;
+    }
     public String getNama() {
         return nama;
     }

@@ -107,6 +107,11 @@ public class panelGame extends javax.swing.JPanel {
                 btnPauseMouseClicked(evt);
             }
         });
+        btnPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPauseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -148,10 +153,15 @@ public class panelGame extends javax.swing.JPanel {
         setPauseGame();    
     }//GEN-LAST:event_btnPauseMouseClicked
 
+    private void btnPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPauseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPauseActionPerformed
+
     private void setPauseGame(){
         if (tmr.isRunning()) {
             tmr.stop();
             formMenuInGame ingameMenu = new formMenuInGame();
+            ingameMenu.kirim(gameSpace);
             ingameMenu.setLocationRelativeTo(null);
             ingameMenu.setVisible(true);
         }

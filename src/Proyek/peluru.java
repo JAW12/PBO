@@ -6,13 +6,14 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
-public class peluru {
+public class peluru implements Serializable{
     protected int damage, posX, posY, mX, mY, width, height;
-    BufferedImage gbrTembak;
+    transient BufferedImage gbrTembak;
 
     public peluru(int damage, int posX, int posY, int mX, int mY, int width, int height) {
         try {

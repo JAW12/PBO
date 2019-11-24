@@ -48,6 +48,11 @@ public class newPlayerName extends javax.swing.JFrame {
                 GoMouseClicked(evt);
             }
         });
+        Go.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,6 +106,10 @@ public class newPlayerName extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_txtNamaKeyPressed
+
+    private void GoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GoActionPerformed
 
     /**
      * @param args the command line arguments
