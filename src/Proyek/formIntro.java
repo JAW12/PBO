@@ -30,8 +30,10 @@ public class formIntro extends javax.swing.JFrame {
     public formIntro() {
         try {
             initComponents();
+            this.setFocusable(true);
             ctrWaktu = 0;
             introDone = false;
+            
             File f = new File("videos/intro.mp4");
             Desktop d = Desktop.getDesktop();
             d.open(f);
@@ -40,14 +42,14 @@ public class formIntro extends javax.swing.JFrame {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
                     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                    if (ctrWaktu >= 5) {
-                        lblSkip.setVisible(true);
+                    if (ctrWaktu >= 3) {
+                        lblSkip.setText("PRESS SPACE TO SKIP THE VIDEO");
                     }
                     else{
-                        lblSkip.setVisible(false);
+                        lblSkip.setText("WELCOME TO SPACE SHOOTER");
                     }
                     
-                    checkIntroDone();
+                    checkIntroDone(false);
                     System.out.println("waktu : " + ctrWaktu);
                 }
             });
@@ -68,13 +70,19 @@ public class formIntro extends javax.swing.JFrame {
         login.setVisible(true);
     }
     
-    private void checkIntroDone(){
-        if (ctrWaktu >= 5) {
+    private void checkIntroDone(Boolean skip){
+        if (skip) {
             t.stop();
             showMainMenu();
-        } 
+        }
         else{
-            ctrWaktu++;
+            if (ctrWaktu >= 10) {
+                t.stop();
+                showMainMenu();
+            } 
+            else{
+                ctrWaktu++;
+            }
         }
     }
 
@@ -90,30 +98,32 @@ public class formIntro extends javax.swing.JFrame {
         lblSkip = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(500, 500));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
             }
         });
 
-        lblSkip.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        lblSkip.setText("PRESS SPACE TO SKIP VIDEO");
+        lblSkip.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblSkip.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSkip.setText("WELCOME TO SPACE SHOOTER");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addComponent(lblSkip)
-                .addGap(28, 28, 28))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(lblSkip, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(lblSkip)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(137, 137, 137)
+                .addComponent(lblSkip, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(203, Short.MAX_VALUE))
         );
 
         pack();
@@ -122,8 +132,7 @@ public class formIntro extends javax.swing.JFrame {
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            ctrWaktu = 5;
-            checkIntroDone();
+            checkIntroDone(true);
         }
     }//GEN-LAST:event_formKeyPressed
 
