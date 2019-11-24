@@ -14,7 +14,6 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 
 public class game implements Serializable{
     protected String nama;
@@ -152,42 +151,53 @@ public class game implements Serializable{
     }
     
     public void nembak(){
-        pesawat tembak = null;
         for(peluru pewpew : ((pesawatPlayer)this.player).listPeluru){
             for(pesawat p : this.listMusuh){
                 if(pewpew.bounds().intersects(p.bounds())){
-                    tembak = p;
+                    p.hp = p.hp-pewpew.damage;
                 }
             }
-            if(tembak != null){
-                this.listMusuh.remove(tembak);
+            
+        }
+    }
+    
+    public void musuhmati(){
+        for (pesawat p : this.listMusuh) {
+            if(p.hp <= 0){
+                System.out.println(((pesawatMusuh)p).jenisPowerUp);
+                if(((pesawatMusuh)p).jenisPowerUp != 2){
+                    ((pesawatPlayer)player).powerUp((((pesawatMusuh)p).jenisPowerUp));
+                }
+                else{
+                    player = ((pesawatPlayer)player).evolve();
+                }
             }
         }
     }
     
     public void ketembak(){
-            boolean tembak = false;
-            for (pesawat p : this.listMusuh) {
-                for(peluru pewpew : ((pesawatMusuh)p).listPeluru){
-                    if(this.player != null){
-                        if(pewpew.bounds().intersects(this.player.bounds())){
-                            tembak = true;
-                        }
-                        if(tembak != false){
-                            //JOptionPane.showMessageDialog(null, "Game Over");
-                            //this.player = null;
-                            //tmr.stop();
-                            break;
-                        }
+        boolean tembak = false;
+        for (pesawat p : this.listMusuh) {
+            for(peluru pewpew : ((pesawatMusuh)p).listPeluru){
+                if(this.player != null){
+                    if(pewpew.bounds().intersects(this.player.bounds())){
+                        tembak = true;
                     }
-                    else{
+                    if(tembak != false){
+                        //JOptionPane.showMessageDialog(null, "Game Over");
+                        //this.player = null;
+                        //tmr.stop();
                         break;
                     }
                 }
-                if(this.player == null){
+                else{
                     break;
                 }
             }
+            if(this.player == null){
+                break;
+            }
+        }
     }
     
     public void drawGame(Graphics grphcs){
@@ -233,9 +243,26 @@ public class game implements Serializable{
         return lewat;
     }
     
+    public Boolean isMati(pesawat p){
+        Boolean mati = false;
+        if(p.hp < 0){
+            mati = true;
+        }
+        
+        return mati;
+    }
+    
     public void checkPesawatMelewatiLayar(){
         for (int i = 0; i < this.listMusuh.size(); i++) {
             if (isMelewatiLayar(this.listMusuh.get(i))) {
+                this.listMusuh.remove(i);
+            }
+        }
+    }
+    
+    public void checkPesawatMati(){
+        for (int i = 0; i < this.listMusuh.size(); i++) {
+            if (isMati(this.listMusuh.get(i))) {
                 this.listMusuh.remove(i);
             }
         }

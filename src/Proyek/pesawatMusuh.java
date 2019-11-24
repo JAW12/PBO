@@ -40,7 +40,7 @@ public class pesawatMusuh extends pesawat{
         setRandomPosX();
         setRandomPosY();
         this.jenisPesawat = jenisPesawat;
-        
+        this.jenisPowerUp = (int)(Math.random()* 15);
         try {
             switch (this.jenisPesawat) {
                 case 1:
