@@ -130,7 +130,10 @@ public class game implements Serializable{
     
     public void addMusuh(){
         Random rnd = new Random();
-        int jenisPesawat = rnd.nextInt(3 - 1 + 1) + 1;
+        int jenisPesawat = rnd.nextInt(4 - 1 + 1) + 1;
+        if (jenisPesawat > 3) {
+            jenisPesawat = 1;
+        }
         pesawatMusuh pmusuh = new pesawatMusuh(100 + 5 * this.getStage(), this.getDifficultyLevel(), jenisPesawat);
         do {
             pmusuh.setRandomPosX();
