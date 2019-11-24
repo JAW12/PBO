@@ -58,6 +58,7 @@ public class pesawatMusuh extends pesawat{
                     break;
             }
             
+            
             this.listPeluru = new ArrayList<>();
         } catch (IOException ex) {
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
