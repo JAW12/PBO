@@ -21,7 +21,7 @@ public class LoginFrame extends javax.swing.JFrame {
      * Creates new form LoginFrame
      */
     
-    static int mode;
+    static int mode; //1 = easy ; 2 = medium ; 3 = hard
     static AudioInputStream audioInputStream;
     static Clip clip;
     static boolean soundOn;
@@ -68,9 +68,9 @@ public class LoginFrame extends javax.swing.JFrame {
 
         btnLoad.setBackground(java.awt.SystemColor.windowBorder);
         btnLoad.setText("Load Game");
-        btnLoad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoadActionPerformed(evt);
+        btnLoad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLoadMouseClicked(evt);
             }
         });
 
@@ -154,7 +154,8 @@ public class LoginFrame extends javax.swing.JFrame {
         f_playername.setVisible(true);
     }//GEN-LAST:event_btnStartMouseClicked
 
-    private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
+    private void btnLoadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoadMouseClicked
+        // TODO add your handling code here:
         try{
             FileInputStream fisp = new FileInputStream("simpan.txt");
             ObjectInputStream baca = new ObjectInputStream(fisp);
@@ -164,6 +165,7 @@ public class LoginFrame extends javax.swing.JFrame {
             f_game.setVisible(true);
             formMenuInGame.f_game = f_game;
             baca.close(); fisp.close();
+            JOptionPane.showMessageDialog(null, "latest saved game has been loaded!");
         }
         catch(Exception ex){
             System.out.println("gagal karena : " + ex);
@@ -181,7 +183,7 @@ public class LoginFrame extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(null, "player's name must at least be 3 characters long");
         }*/
-    }//GEN-LAST:event_btnLoadActionPerformed
+    }//GEN-LAST:event_btnLoadMouseClicked
 
     /**
      * @param args the command line arguments

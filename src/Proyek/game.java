@@ -23,6 +23,7 @@ public class game implements Serializable{
     protected ArrayList<pesawat> listMusuh;
     protected pesawat player;
     protected transient BufferedImage jpg;
+    protected String gameMode;
     
     public game(String nama,int stage, int difficulty) {
         this.nama = nama;
@@ -35,6 +36,20 @@ public class game implements Serializable{
             jpg = ImageIO.read(new File("images/bg2.jpg"));
         } catch (IOException ex) {
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        switch (this.difficultyLevel) {
+            case 1:
+                this.gameMode = "Easy";
+                break;
+            case 2:
+                this.gameMode = "Medium";
+                break;
+            case 3:
+                this.gameMode = "Hard";
+                break;
+            default:
+                break;
         }
     }
 
@@ -181,10 +196,11 @@ public class game implements Serializable{
         Font f = new Font("ARIAL",Font.BOLD, 17);
         g2.setFont(f);
         g2.setColor(Color.WHITE);
-        g2.drawString("Player : " + newPlayerName.namaPlayer, 5, 30);
+        g2.drawString("Player : " + newPlayerName.namaPlayer.toUpperCase(), 5, 30);
         g2.drawString("Score  : " + this.score, 5, 60);
         g2.drawString("Hp : " + this.player.getHp(), 5, 90);
-        g2.drawString("Stage : " + this.stage, 325, 30);
+        g2.drawString("Mode : " + this.gameMode, 325, 30);
+        g2.drawString("Stage : " + this.stage, 325, 60);
         
         if(this.player != null){
             this.getPlayer().draw(grphcs);    

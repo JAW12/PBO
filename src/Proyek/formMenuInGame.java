@@ -72,11 +72,6 @@ public class formMenuInGame extends javax.swing.JFrame {
                 btnSaveGameMouseClicked(evt);
             }
         });
-        btnSaveGame.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveGameActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel1.setText("Game Paused");
@@ -94,11 +89,6 @@ public class formMenuInGame extends javax.swing.JFrame {
                 btnResumeMouseClicked(evt);
             }
         });
-        btnResume.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResumeActionPerformed(evt);
-            }
-        });
 
         btnBackToMain1.setText("Back to Main Menu");
         btnBackToMain1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -114,7 +104,7 @@ public class formMenuInGame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(52, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnExitGame, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExitGame, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnResume, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
@@ -140,9 +130,9 @@ public class formMenuInGame extends javax.swing.JFrame {
                 .addComponent(btnBackToMain1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSaveGame, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(btnExitGame, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -156,15 +146,21 @@ public class formMenuInGame extends javax.swing.JFrame {
 
     private void btnResumeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResumeMouseClicked
         // TODO add your handling code here:
-        this.setVisible(false);
-        if (!panelGame.tmr.isRunning()) {
-            panelGame.tmr.start();
-        }
+        setResumePause();
     }//GEN-LAST:event_btnResumeMouseClicked
 
     private void btnSaveGameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveGameMouseClicked
         // TODO add your handling code here:
-        
+        try{
+            FileOutputStream fisp = new FileOutputStream("simpan.txt");
+            ObjectOutputStream save_player = new ObjectOutputStream(fisp);
+            save_player.writeObject(terimaGame); 
+            save_player.close(); fisp.close();
+            JOptionPane.showMessageDialog(null, "current game has been saved!");
+        }
+        catch(Exception ex){
+            System.out.println("gagal karena " + ex);
+        }
     }//GEN-LAST:event_btnSaveGameMouseClicked
 
     private void btnExitGameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitGameMouseClicked
@@ -186,27 +182,11 @@ public class formMenuInGame extends javax.swing.JFrame {
 
     private void btnBackToMain1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackToMain1MouseClicked
         // TODO add your handling code here:
-        int n = JOptionPane.showConfirmDialog(null, "Do you want to save current game?", "Exit Game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int n = JOptionPane.showConfirmDialog(null, "All your current progress will be lost. Are you sure?", "Back to main menu", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (n == JOptionPane.YES_OPTION) { //save game
-            
+            showMainMenu();
         }
     }//GEN-LAST:event_btnBackToMain1MouseClicked
-
-    private void btnResumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResumeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnResumeActionPerformed
-
-    private void btnSaveGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveGameActionPerformed
-        try{
-            FileOutputStream fisp = new FileOutputStream("simpan.txt");
-            ObjectOutputStream save_player = new ObjectOutputStream(fisp);
-            save_player.writeObject(terimaGame); 
-            save_player.close(); fisp.close();
-        }
-        catch(Exception ex){
-            System.out.println("gagal karena " + ex);
-        }
-    }//GEN-LAST:event_btnSaveGameActionPerformed
 
     /**
      * @param args the command line arguments

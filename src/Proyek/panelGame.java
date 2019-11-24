@@ -101,7 +101,7 @@ public class panelGame extends javax.swing.JPanel {
             }
         });
 
-        btnPause.setText("Pause");
+        btnPause.setText("I I");
         btnPause.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPauseMouseClicked(evt);
@@ -118,7 +118,7 @@ public class panelGame extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(425, Short.MAX_VALUE)
+                .addContainerGap(448, Short.MAX_VALUE)
                 .addComponent(btnPause)
                 .addContainerGap())
         );
@@ -126,8 +126,8 @@ public class panelGame extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnPause)
-                .addContainerGap(464, Short.MAX_VALUE))
+                .addComponent(btnPause, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(451, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
