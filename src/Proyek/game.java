@@ -14,6 +14,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 public class game implements Serializable{
     protected String nama;
@@ -108,6 +109,7 @@ public class game implements Serializable{
             this.setStage(this.getStage() + 1);
             randomMusuh();
             System.out.println("pergantian stage. Stage saat ini : " + this.getStage());
+            this.score += 100;
         }
     }
     
@@ -146,6 +148,7 @@ public class game implements Serializable{
         for(pesawat p : this.listMusuh){
             if(this.getPlayer().bounds().intersects(p.bounds())){
                 tabrak = p;
+                this.player.hp-=50;
             }
         }
         if(tabrak != null){
@@ -185,6 +188,13 @@ public class game implements Serializable{
                 if(this.player != null){
                     if(pewpew.bounds().intersects(this.player.bounds())){
                         tembak = true;
+                        if(this.difficultyLevel == 1)
+                        this.player.hp-=20;
+                        else if(this.difficultyLevel == 2)
+                        this.player.hp-=40;
+                        else if(this.difficultyLevel == 3)
+                        this.player.hp-=60;
+                        
                     }
                     if(tembak != false){
                         //JOptionPane.showMessageDialog(null, "Game Over");
@@ -267,6 +277,7 @@ public class game implements Serializable{
         for (int i = 0; i < this.listMusuh.size(); i++) {
             if (isMati(this.listMusuh.get(i))) {
                 this.listMusuh.remove(i);
+                this.score += 20;
             }
         }
     }
