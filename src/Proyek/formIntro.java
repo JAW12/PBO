@@ -87,7 +87,6 @@ public class formIntro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelIntro1 = new Proyek.panelIntro();
         lblSkip = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,17 +96,6 @@ public class formIntro extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout panelIntro1Layout = new javax.swing.GroupLayout(panelIntro1);
-        panelIntro1.setLayout(panelIntro1Layout);
-        panelIntro1Layout.setHorizontalGroup(
-            panelIntro1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 31, Short.MAX_VALUE)
-        );
-        panelIntro1Layout.setVerticalGroup(
-            panelIntro1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 31, Short.MAX_VALUE)
-        );
-
         lblSkip.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         lblSkip.setText("PRESS SPACE TO SKIP VIDEO");
 
@@ -115,21 +103,17 @@ public class formIntro extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelIntro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addComponent(lblSkip)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelIntro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(lblSkip)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(lblSkip)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -138,7 +122,8 @@ public class formIntro extends javax.swing.JFrame {
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            showMainMenu();
+            ctrWaktu = 5;
+            checkIntroDone();
         }
     }//GEN-LAST:event_formKeyPressed
 
@@ -179,6 +164,5 @@ public class formIntro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblSkip;
-    private Proyek.panelIntro panelIntro1;
     // End of variables declaration//GEN-END:variables
 }

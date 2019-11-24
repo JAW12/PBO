@@ -56,6 +56,8 @@ public class panelGame extends javax.swing.JPanel {
                 }
                 gameSpace.tabrak();
                 gameSpace.nembak();
+                gameSpace.musuhmati();
+                gameSpace.checkPesawatMati();
                 gameSpace.ketembak();
                 gameSpace.checkPesawatMelewatiLayar();
                 repaint();
@@ -67,7 +69,7 @@ public class panelGame extends javax.swing.JPanel {
     
     private void newGame(){
         gameSpace = new game(newPlayerName.namaPlayer, 1, LoginFrame.mode);
-        gameSpace.setPlayer(new pesawatSingleShooter(100, 1));
+        gameSpace.setPlayer(new pesawatSingleShooter(100, 250, 400));
         gameSpace.randomMusuh();
     }
     
@@ -102,6 +104,7 @@ public class panelGame extends javax.swing.JPanel {
         });
 
         btnPause.setText("I I");
+        btnPause.setFocusable(false);
         btnPause.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPauseMouseClicked(evt);

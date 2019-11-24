@@ -47,14 +47,14 @@ public class LoginPanel extends javax.swing.JPanel {
         Graphics2D g2 = (Graphics2D)g;
         g2.drawImage(jpg,0,0,500,500,null);
         try {
-            jpg = ImageIO.read(new File("images/playerShip1_blue.png"));
+            jpg = ImageIO.read(new File("images/p1.png"));
         } catch (IOException ex) {
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         g2 = (Graphics2D)g;
         g2.drawImage(jpg,180,410,40,40,null);
         try {
-            jpg = ImageIO.read(new File("images/playerShip1_blue.png"));
+            jpg = ImageIO.read(new File("images/p1.png"));
         } catch (IOException ex) {
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }

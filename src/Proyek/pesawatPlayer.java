@@ -1,5 +1,8 @@
 package Proyek;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,47 +16,36 @@ public abstract class pesawatPlayer extends pesawat{
     2 = double shooter
     3 = triple shooter
     */
-    protected int shooterCount;
-    protected boolean shieldActive;
+    protected int shieldActive;
     protected ArrayList<peluru> listPeluru;
     protected int damageNabrak;
+    transient BufferedImage gbrShield;
+
     
-    public pesawatPlayer(int hp, int fireRate) {
-        super(hp, 200, 425);
+    public pesawatPlayer(int hp, int x, int y) {
+        super(hp, x, y);
         this.damagePesawat = 20;
         this.damageNabrak = 50;
         this.mX = 5;
         //awal game dimulai pasti dia cuma bisa nembak 1x dan ga punya shield
-        this.shooterCount = 1; 
-        this.shieldActive = false;
+        this.shieldActive = -1;
         this.listPeluru = new ArrayList<>();
         try {
-            this.gbrPesawat = ImageIO.read(new File("images/playerShip1_blue.png"));
+            this.gbrShield = ImageIO.read(new File("images/shield.png"));
         } catch (IOException ex) {
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
-    public int getShooterCount() {
-        return shooterCount;
-    }
-
-    public void setShooterCount(int shooterCount) {
-        this.shooterCount = shooterCount;
-    }
-    
     @Override
-    public void shoot(){
-        for (int i = 0; i < shooterCount; i++) {
-            listPeluru.add(new peluru(damagePesawat, posX + (width / 2) - 3, posY-2, 7, 7, 7, 10));
-        }
-    }
+    public abstract void shoot();
 
-    public boolean isShieldActive() {
+    public int getShieldActive() {
         return shieldActive;
     }
 
-    public void setShieldActive(boolean shieldActive) {
+    public void setShieldActive(int shieldActive) {
         this.shieldActive = shieldActive;
     }
 
@@ -78,6 +70,25 @@ public abstract class pesawatPlayer extends pesawat{
     }
     
     public void powerUp(int jenisPowerUp){
+        if(jenisPowerUp == 0){
+            hp += 20;
+        }
+        else if(jenisPowerUp == 1){
+            shieldActive = 300;
+        }
+        else if(jenisPowerUp == 3){
+            damagePesawat += 20;
+        }
+    }
+    
+    @Override
+    public void draw(Graphics g){
+        Graphics2D g2 = (Graphics2D)g;
+        if(shieldActive > 0){
+            g2.drawImage(gbrShield, posX-12, posY-12, width+25, height+25, null);
+            shieldActive--;
+        }
+        g2.drawImage(gbrPesawat, posX, posY, width, height, null);
         
     }
     
