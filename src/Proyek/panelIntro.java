@@ -6,6 +6,8 @@
 package Proyek;
 
 import java.awt.Desktop;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -23,6 +27,8 @@ public class panelIntro extends javax.swing.JPanel {
     MediaPlayer mplayerIntro, mplayerLoad;
     Boolean vidIntroOn;
     Boolean vidLoadOn;
+    
+    
     public panelIntro() {
         initComponents();
         this.setFocusable(true);
@@ -31,6 +37,8 @@ public class panelIntro extends javax.swing.JPanel {
 //        mplayerIntro = new MediaPlayer(media);
 //        //mplayerLoad = new MediaPlayer(mediaLoad);
 //        mplayerIntro.setAutoPlay(true);
+
+            
         
     }
     
@@ -41,7 +49,7 @@ public class panelIntro extends javax.swing.JPanel {
     public void playLoadScreen(){
         mplayerLoad.play();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,6 +59,8 @@ public class panelIntro extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblSkip = new javax.swing.JLabel();
+
         setPreferredSize(new java.awt.Dimension(500, 500));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -58,39 +68,52 @@ public class panelIntro extends javax.swing.JPanel {
             }
         });
 
+        lblSkip.setFont(new java.awt.Font("Maiandra GD", 1, 18)); // NOI18N
+        lblSkip.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSkip.setText("WELCOME TO SPACE SHOOTER");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(lblSkip, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 528, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(137, 137, 137)
+                .addComponent(lblSkip, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(202, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            try {
-                //            mplayerIntro.stop();
-//            this.setVisible(false);
-//            LoginFrame lp = new LoginFrame();
-//            lp.setLocationRelativeTo(null);
-//            lp.setVisible(true);    
+//        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+//            try {
+//                //            mplayerIntro.stop();
+////            this.setVisible(false);
+////            LoginFrame lp = new LoginFrame();
+////            lp.setLocationRelativeTo(null);
+////            lp.setVisible(true);    
+//
+//            File f = new File("videos/intro.mp4");
+//            Desktop d = Desktop.getDesktop();
+//            d.open(f);
+//            
+//            } catch (IOException ex) {
+//                Logger.getLogger(panelIntro.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
 
-            File f = new File("videos/intro.mp4");
-            Desktop d = Desktop.getDesktop();
-            d.open(f);
-            
-            } catch (IOException ex) {
-                Logger.getLogger(panelIntro.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        
     }//GEN-LAST:event_formKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblSkip;
     // End of variables declaration//GEN-END:variables
 }

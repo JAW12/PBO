@@ -114,7 +114,21 @@ public class game implements Serializable{
     }
     
     public void randomMusuh(){
-        int rand = (int)(Math.random() * 15) + 3;
+        /*
+        batasan random sesuai mode -> difficultyLevel * 2 + 1
+            easy : 3    
+            medium : 5
+            hard : 7
+        setiap kelipatan 10 stage maka munculkan += 3 musuh
+        */
+        Random rnd = new Random();
+        int batasRand = difficultyLevel * 2 + 1;
+        int rand = rnd.nextInt(batasRand - 2 + 1) + 2;
+        
+        if (rand % 10 == 0) {
+            rand += 5;
+        }
+        
         for(int i =0; i < rand; i++){
             this.addMusuh();
         }

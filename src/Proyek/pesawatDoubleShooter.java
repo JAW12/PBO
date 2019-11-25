@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Proyek;
 
 import java.io.File;
@@ -11,10 +6,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
-/**
- *
- * @author Winda AU
- */
 public class pesawatDoubleShooter extends pesawatPlayer {
 
     public pesawatDoubleShooter(int hp, int x, int y) {
@@ -31,7 +22,7 @@ public class pesawatDoubleShooter extends pesawatPlayer {
         return new pesawatTripleShooter(hp, posX, posY);
     }
     
-      @Override
+    @Override
     public void shoot() {
         listPeluru.add(new peluru(damagePesawat, posX, posY+10, 7, 7, 7, 10));
         listPeluru.add(new peluru(damagePesawat, posX + width - 3, posY+10, 7, 7, 7, 10));

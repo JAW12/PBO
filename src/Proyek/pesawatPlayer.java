@@ -21,13 +21,12 @@ public abstract class pesawatPlayer extends pesawat{
     protected int damageNabrak;
     transient BufferedImage gbrShield;
 
-    
     public pesawatPlayer(int hp, int x, int y) {
         super(hp, x, y);
         this.damagePesawat = 20;
         this.damageNabrak = 50;
         this.mX = 5;
-        //awal game dimulai pasti dia cuma bisa nembak 1x dan ga punya shield
+        //awal game dimulai pasti dia ga punya shield
         this.shieldActive = -1;
         this.listPeluru = new ArrayList<>();
         try {

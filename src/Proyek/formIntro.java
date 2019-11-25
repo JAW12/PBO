@@ -28,64 +28,10 @@ public class formIntro extends javax.swing.JFrame {
     Boolean introDone;
     Timer t;
     public formIntro() {
-        try {
-            initComponents();
-            this.setFocusable(true);
-            ctrWaktu = 0;
-            introDone = false;
-            
-            File f = new File("videos/intro.mp4");
-            Desktop d = Desktop.getDesktop();
-            d.open(f);
-            
-            t = new Timer(1000, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                    if (ctrWaktu >= 3) {
-                        lblSkip.setText("PRESS SPACE TO SKIP THE VIDEO");
-                    }
-                    else{
-                        lblSkip.setText("WELCOME TO SPACE SHOOTER");
-                    }
-                    
-                    checkIntroDone(false);
-                    System.out.println("waktu : " + ctrWaktu);
-                }
-            });
-            t.start();
-            
-            
-        } catch (IOException ex) {
-            Logger.getLogger(formIntro.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
+        initComponents();
+        panelGameIntro1.f_intro = getMe();
     }
     
-    private void showMainMenu(){
-        this.setVisible(false);
-        LoginFrame login = new LoginFrame();
-        login.setLocationRelativeTo(null);
-        login.setVisible(true);
-    }
-    
-    private void checkIntroDone(Boolean skip){
-        if (skip) {
-            t.stop();
-            showMainMenu();
-        }
-        else{
-            if (ctrWaktu >= 10) {
-                t.stop();
-                showMainMenu();
-            } 
-            else{
-                ctrWaktu++;
-            }
-        }
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,7 +41,7 @@ public class formIntro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblSkip = new javax.swing.JLabel();
+        panelGameIntro1 = new Proyek.panelGameIntro();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(500, 500));
@@ -105,25 +51,19 @@ public class formIntro extends javax.swing.JFrame {
             }
         });
 
-        lblSkip.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblSkip.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSkip.setText("WELCOME TO SPACE SHOOTER");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(lblSkip, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(panelGameIntro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(lblSkip, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addComponent(panelGameIntro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         pack();
@@ -131,9 +71,7 @@ public class formIntro extends javax.swing.JFrame {
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            checkIntroDone(true);
-        }
+        
     }//GEN-LAST:event_formKeyPressed
 
     /**
@@ -170,8 +108,13 @@ public class formIntro extends javax.swing.JFrame {
             }
         });
     }
+    
+    private formIntro getMe(){
+        return this;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lblSkip;
+    private Proyek.panelGameIntro panelGameIntro1;
     // End of variables declaration//GEN-END:variables
 }
