@@ -23,14 +23,14 @@ public class panelGame extends javax.swing.JPanel {
         exitGame = false;
         newGame();
         for (pesawat p : gameSpace.listMusuh) {
-            ((pesawatMusuh)p).tmrTembak = (int)(Math.random()*35) + 20;
+            ((pesawatMusuh)p).tmrTembak = (int)(Math.random()*50) + 10;
         }
         tmr = new Timer(50, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 for (pesawat p : gameSpace.listMusuh) {
                     if(((pesawatMusuh)p).tmrTembak == 0){
-                        ((pesawatMusuh)p).tmrTembak = (int)(Math.random()*35) + 20;
+                        ((pesawatMusuh)p).tmrTembak = (int)(Math.random()*50) + 10;
                         p.shoot();
                     }
                     else{
@@ -60,6 +60,7 @@ public class panelGame extends javax.swing.JPanel {
                 gameSpace.checkPesawatMati();
                 gameSpace.ketembak();
                 gameSpace.checkPesawatMelewatiLayar();
+                gameSpace.checkPeluruMelewatiLayar();
                 repaint();
             }
         });
@@ -69,7 +70,7 @@ public class panelGame extends javax.swing.JPanel {
     
     private void newGame(){
         gameSpace = new game(newPlayerName.namaPlayer, 1, LoginFrame.mode);
-        gameSpace.setPlayer(new pesawatSingleShooter(100, 250, 400));
+        gameSpace.setPlayer(new pesawatSingleShooter(100, 250, 450));
         gameSpace.randomMusuh();
     }
     

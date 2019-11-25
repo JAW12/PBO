@@ -70,7 +70,7 @@ public class pesawatMusuh extends pesawat{
     
     @Override
     public void shoot(){
-        listPeluru.add(new peluru(damagePesawat, posX + (width / 2) - 3, posY+height, 7, -9, 7, 10));    
+        listPeluru.add(new peluru(damagePesawat, posX + (width / 2) - 3, posY+height, 7, -7, 7, 15, 2));    
     }
     
     public void cekPesawatMantul(){

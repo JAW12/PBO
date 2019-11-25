@@ -285,6 +285,19 @@ public class game implements Serializable{
         return lewat;
     }
     
+     public Boolean isPeluruMelewatiLayar(peluru p){
+        Boolean lewat = false;
+        if (p.getPosX()  <= 0) {
+            lewat = true;
+        }
+        
+        if (p.getPosY() <=  0) {
+            lewat = true;
+        }
+        
+        return lewat;
+    }
+    
     public Boolean isMati(pesawat p){
         Boolean mati = false;
         if(p.hp < 0){
@@ -298,6 +311,14 @@ public class game implements Serializable{
         for (int i = 0; i < this.listMusuh.size(); i++) {
             if (isMelewatiLayar(this.listMusuh.get(i))) {
                 this.listMusuh.remove(i);
+            }
+        }
+    }
+    
+    public void checkPeluruMelewatiLayar(){
+        for (int i = 0; i < ((pesawatPlayer)player).listPeluru.size(); i++) {
+            if (isPeluruMelewatiLayar(((pesawatPlayer)player).listPeluru.get(i))) {
+                ((pesawatPlayer)player).listPeluru.remove(i);
             }
         }
     }

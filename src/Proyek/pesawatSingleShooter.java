@@ -24,6 +24,6 @@ public class pesawatSingleShooter extends pesawatPlayer{
 
     @Override
     public void shoot() {
-        listPeluru.add(new peluru(damagePesawat, posX + (width / 2) - 3, posY-2, 7, 7, 7, 10));
+        listPeluru.add(new peluru(damagePesawat, posX + (width / 2) - 3, posY-2, 7, 6, 7, 15, 1));
     }    
 }

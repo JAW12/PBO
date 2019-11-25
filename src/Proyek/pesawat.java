@@ -16,7 +16,7 @@ public abstract class pesawat implements Serializable{
         this.posX = posX;
         this.posY = posY;
         this.mX = 5;
-        this.mY = 5;
+        this.mY = 4;
         this.width = 40;
         this.height = 40;
     }

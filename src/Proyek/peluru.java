@@ -14,12 +14,25 @@ import javax.imageio.ImageIO;
 public class peluru implements Serializable{
     protected int damage, posX, posY, mX, mY, width, height;
     transient BufferedImage gbrTembak;
-
-    public peluru(int damage, int posX, int posY, int mX, int mY, int width, int height) {
-        try {
-            this.gbrTembak = ImageIO.read(new File("images/laser.png"));
-        } catch (IOException ex) {
-            Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
+/*
+    tipe
+    1 -> player (blue)
+    2 -> musuh (red)
+    */
+    public peluru(int damage, int posX, int posY, int mX, int mY, int width, int height, int tipe) {
+        if(tipe == 1){
+            try {
+                this.gbrTembak = ImageIO.read(new File("images/laser.png"));
+            } catch (IOException ex) {
+                Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else if(tipe == 2){
+            try {
+                this.gbrTembak = ImageIO.read(new File("images/laser2.png"));
+            } catch (IOException ex) {
+                Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         this.damage = damage;
         this.posX = posX;
