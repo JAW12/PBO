@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 public class pesawatMusuh extends pesawat{
     
     protected ArrayList<peluru> listPeluru;
+    protected ArrayList<peluru> idxHapus;
     protected int tmrTembak;
     protected int jenisPesawat, jenisPowerUp;
     /*
@@ -60,6 +61,7 @@ public class pesawatMusuh extends pesawat{
             
             
             this.listPeluru = new ArrayList<>();
+            this.idxHapus = new ArrayList<>();
         } catch (IOException ex) {
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
         }

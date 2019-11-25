@@ -155,18 +155,31 @@ public class game implements Serializable{
             this.listMusuh.remove(tabrak);
         }
     }
-    
+    ArrayList<peluru> idxHapus;
     public void nembak(){
+        idxHapus = new ArrayList<peluru>();
         for(peluru pewpew : ((pesawatPlayer)this.player).listPeluru){
             for(pesawat p : this.listMusuh){
                 if(pewpew.bounds().intersects(p.bounds())){
                     p.hp = p.hp-pewpew.damage;
+                    idxHapus.add(pewpew);
                 }
-            }
-            
+            }           
         }
+        hapus();
     }
     
+    
+    public void hapus(){
+        for (int i = 0; i < idxHapus.size(); i++) {
+            ((pesawatPlayer)this.player).listPeluru.remove(idxHapus.get(i));
+        }
+        for (pesawat p : this.listMusuh){
+            for(int i =0; i < ((pesawatMusuh)p).idxHapus.size(); i++){
+                ((pesawatMusuh)p).listPeluru.remove(((pesawatMusuh)p).idxHapus.get(i));
+            }
+        }
+    }
     public void musuhmati(){
         for (pesawat p : this.listMusuh) {
             if(p.hp <= 0){
@@ -184,6 +197,7 @@ public class game implements Serializable{
     public void ketembak(){
         boolean tembak = false;
         for (pesawat p : this.listMusuh) {
+            ((pesawatMusuh)p).idxHapus = new ArrayList<peluru>();
             for(peluru pewpew : ((pesawatMusuh)p).listPeluru){
                 if(this.player != null){
                     if(pewpew.bounds().intersects(this.player.bounds())){
@@ -194,7 +208,7 @@ public class game implements Serializable{
                         this.player.hp-=40;
                         else if(this.difficultyLevel == 3)
                         this.player.hp-=60;
-                        
+                        ((pesawatMusuh)p).idxHapus.add(pewpew);
                     }
                     if(tembak != false){
                         //JOptionPane.showMessageDialog(null, "Game Over");
@@ -211,6 +225,7 @@ public class game implements Serializable{
                 break;
             }
         }
+        hapus();
     }
     
     public void drawGame(Graphics grphcs){
