@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 public class panelGame extends javax.swing.JPanel {
@@ -61,6 +62,10 @@ public class panelGame extends javax.swing.JPanel {
                 gameSpace.ketembak();
                 gameSpace.checkPesawatMelewatiLayar();
                 gameSpace.checkPeluruMelewatiLayar();
+                if(gameSpace.player.hp<=0){
+                    tmr.stop();
+                    JOptionPane.showMessageDialog(null, "!!!!  Game Over!!!!");
+                }
                 repaint();
             }
         });

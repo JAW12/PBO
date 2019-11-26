@@ -162,7 +162,9 @@ public class game implements Serializable{
         for(pesawat p : this.listMusuh){
             if(this.getPlayer().bounds().intersects(p.bounds())){
                 tabrak = p;
-                this.player.hp-=50;
+                if(((pesawatPlayer)player).shieldActive<=0){
+                    this.player.hp-=50;
+                }
             }
         }
         if(tabrak != null){
@@ -216,12 +218,14 @@ public class game implements Serializable{
                 if(this.player != null){
                     if(pewpew.bounds().intersects(this.player.bounds())){
                         tembak = true;
-                        if(this.difficultyLevel == 1)
-                        this.player.hp-=20;
-                        else if(this.difficultyLevel == 2)
-                        this.player.hp-=40;
-                        else if(this.difficultyLevel == 3)
-                        this.player.hp-=60;
+                        if(((pesawatPlayer)player).shieldActive<=0){
+                            if(this.difficultyLevel == 1)
+                            this.player.hp-=20;
+                            else if(this.difficultyLevel == 2)
+                            this.player.hp-=40;
+                            else if(this.difficultyLevel == 3)
+                            this.player.hp-=60;
+                        }
                         ((pesawatMusuh)p).idxHapus.add(pewpew);
                     }
                     if(tembak != false){
