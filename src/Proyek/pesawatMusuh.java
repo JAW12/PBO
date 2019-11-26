@@ -73,10 +73,6 @@ public class pesawatMusuh extends pesawat{
         listPeluru.add(new peluru(damagePesawat, posX + (width / 2) - 3, posY+height, 7, -7, 7, 15, 2));    
     }
     
-    public void cekPesawatMantul(){
-       
-    }
-
     @Override
     public void moveMusuh() {
         super.moveMusuh();
