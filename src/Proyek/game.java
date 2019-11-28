@@ -1,6 +1,5 @@
 package Proyek;
 
-import static Proyek.panelGame.tmr;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -14,7 +13,6 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 
 public class game implements Serializable{
     protected String nama;
@@ -123,13 +121,16 @@ public class game implements Serializable{
         */
         Random rnd = new Random();
         int batasRand = difficultyLevel * 2 + 1;
-        int rand = rnd.nextInt(batasRand - 2 + 1) + 2;
+        int hasilRandMusuh = rnd.nextInt(batasRand - 2 + 1) + 2;
         
-        if (rand % 10 == 0) {
-            rand += 5;
+        //tambah jumlah musuh sesuai stage
+        hasilRandMusuh += stage / 5;
+        if (hasilRandMusuh >= 15) {
+            hasilRandMusuh = 15;
         }
         
-        for(int i =0; i < rand; i++){
+        System.out.println("Stage : " + stage + " - Musuh : " + hasilRandMusuh);
+        for(int i =0; i < hasilRandMusuh; i++){
             this.addMusuh();
         }
     }
