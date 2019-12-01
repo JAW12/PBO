@@ -20,7 +20,7 @@ public class LoginFrame extends javax.swing.JFrame {
     /**
      * Creates new form LoginFrame
      */
-    
+    static boolean LOADGAME=false;
     static int mode; //1 = easy ; 2 = medium ; 3 = hard
     static AudioInputStream audioInputStream;
     static Clip clip;
@@ -65,12 +65,22 @@ public class LoginFrame extends javax.swing.JFrame {
                 btnStartMouseClicked(evt);
             }
         });
+        btnStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartActionPerformed(evt);
+            }
+        });
 
         btnLoad.setBackground(java.awt.SystemColor.windowBorder);
         btnLoad.setText("Load Game");
         btnLoad.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLoadMouseClicked(evt);
+            }
+        });
+        btnLoad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadActionPerformed(evt);
             }
         });
 
@@ -157,9 +167,11 @@ public class LoginFrame extends javax.swing.JFrame {
     private void btnLoadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoadMouseClicked
         // TODO add your handling code here:
         try{
+            LOADGAME=true;
             FileInputStream fisp = new FileInputStream("simpan.txt");
             ObjectInputStream baca = new ObjectInputStream(fisp);
             game gg = (game) baca.readObject(); 
+            newPlayerName.namaPlayer = gg.getNama();
             formGameSpace f_game = new formGameSpace(gg);
             f_game.setLocationRelativeTo(null);
             f_game.setVisible(true);
@@ -184,6 +196,14 @@ public class LoginFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "player's name must at least be 3 characters long");
         }*/
     }//GEN-LAST:event_btnLoadMouseClicked
+
+    private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
+        
+    }//GEN-LAST:event_btnLoadActionPerformed
+
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnStartActionPerformed
 
     /**
      * @param args the command line arguments

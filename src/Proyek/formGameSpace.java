@@ -12,6 +12,7 @@ public class formGameSpace extends javax.swing.JFrame {
     public formGameSpace(game ggg) {
         initComponents();
         this.setResizable(false);
+        panelGame1.LoadGame(ggg);
         LoginFrame.soundEffect(LoginFrame.soundOn);
     }
 

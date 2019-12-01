@@ -22,63 +22,73 @@ public class panelGame extends javax.swing.JPanel {
         initComponents();
         this.setFocusable(true);
         exitGame = false;
-        newGame();
-        for (pesawat p : gameSpace.listMusuh) {
-            ((pesawatMusuh)p).tmrTembak = (int)(Math.random()*50) + 10;
+        if (LoginFrame.LOADGAME==false)
+        {
+            newGame();
+            runawal();
         }
-        tmr = new Timer(50, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                for (pesawat p : gameSpace.listMusuh) {
-                    if(((pesawatMusuh)p).tmrTembak == 0){
-                        ((pesawatMusuh)p).tmrTembak = (int)(Math.random()*50) + 10;
-                        p.shoot();
-                    }
-                    else{
-                        ((pesawatMusuh)p).tmrTembak--;
-                    }
-                    
-                }
-                for (pesawat p : gameSpace.listMusuh) {
-                    p.moveMusuh();
-                }
-                for (peluru p : ((pesawatPlayer)gameSpace.player).listPeluru){
-                    p.move();
-                }
-                for (pesawat p : gameSpace.listMusuh) {
-                    for (peluru pl : ((pesawatMusuh)p).listPeluru){
-                        pl.move();
-                    }
-                }
-                
-                ctrWaktu+= 0.05;
-                if (ctrWaktu >= 1) { //setiap 1 detik
-                    gameSpace.nextStage();
-                }
-                gameSpace.tabrak();
-                gameSpace.nembak();
-                gameSpace.musuhmati();
-                gameSpace.checkPesawatMati();
-                gameSpace.ketembak();
-                gameSpace.checkPesawatMelewatiLayar();
-                gameSpace.checkPeluruMelewatiLayar();
-                if(gameSpace.player.hp<=0){
-                    tmr.stop();
-                    JOptionPane.showMessageDialog(null, "!!!!  Game Over!!!!");
-                }
-                repaint();
-            }
-        });
-        
-        tmr.start();
     }
-    
+    private void runawal()
+    {
+        gameSpace.loadGambar();
+        for (pesawat p : gameSpace.listMusuh) {
+                ((pesawatMusuh)p).tmrTembak = (int)(Math.random()*50) + 10;
+            }
+            tmr = new Timer(50, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    for (pesawat p : gameSpace.listMusuh) {
+                        if(((pesawatMusuh)p).tmrTembak == 0){
+                            ((pesawatMusuh)p).tmrTembak = (int)(Math.random()*50) + 10;
+                            p.shoot();
+                        }
+                        else{
+                            ((pesawatMusuh)p).tmrTembak--;
+                        }
+
+                    }
+                    for (pesawat p : gameSpace.listMusuh) {
+                        p.moveMusuh();
+                    }
+                    for (peluru p : ((pesawatPlayer)gameSpace.player).listPeluru){
+                        p.move();
+                    }
+                    for (pesawat p : gameSpace.listMusuh) {
+                        for (peluru pl : ((pesawatMusuh)p).listPeluru){
+                            pl.move();
+                        }
+                    }
+
+                    ctrWaktu+= 0.05;
+                    if (ctrWaktu >= 1) { //setiap 1 detik
+                        gameSpace.nextStage();
+                    }
+                    gameSpace.tabrak();
+                    gameSpace.nembak();
+                    gameSpace.musuhmati();
+                    gameSpace.checkPesawatMati();
+                    gameSpace.ketembak();
+                    gameSpace.checkPesawatMelewatiLayar();
+                    gameSpace.checkPeluruMelewatiLayar();
+                    if(gameSpace.player.hp<=0){
+                        tmr.stop();
+                        JOptionPane.showMessageDialog(null, "!!!!  Game Over!!!!");
+                    }
+                    repaint();
+                }
+            });
+
+            tmr.start();
+    }
     private void newGame(){
         gameSpace = new game(newPlayerName.namaPlayer, 1, LoginFrame.mode);
         gameSpace.setPlayer(new pesawatSingleShooter(100, 250, 450));
         gameSpace.randomMusuh();
     }
-    
+    public void LoadGame(game gg){
+        gameSpace = gg;
+        runawal();
+    }
     public void checkExitGame(){
         if (exitGame) {
             this.setVisible(false);
