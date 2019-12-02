@@ -266,6 +266,15 @@ public class game implements Serializable{
         g2.drawString("Hp : " + this.player.getHp(), 5, 90);
         g2.drawString("Mode : " + this.gameMode, 325, 30);
         g2.drawString("Stage : " + this.stage, 325, 60);
+        if(!((pesawatPlayer)this.player).powerUP.equals("")){
+            if(!((pesawatPlayer)this.player).powerUP.contains("Evolved")){
+                g2.drawString(((pesawatPlayer)this.player).powerUP, 175, 450);
+            }
+            else{
+                g2.drawString(((pesawatPlayer)this.player).powerUP, 115, 450);
+            }
+            
+        }
         
         if(this.player != null){
             this.getPlayer().draw(grphcs);    

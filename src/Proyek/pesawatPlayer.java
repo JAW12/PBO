@@ -20,6 +20,8 @@ public abstract class pesawatPlayer extends pesawat{
     protected ArrayList<peluru> listPeluru;
     protected int damageNabrak;
     transient BufferedImage gbrShield;
+    protected int ctrPowerUp;
+    protected String powerUP;
 
     public pesawatPlayer(int hp, int x, int y) {
         super(hp, x, y);
@@ -29,6 +31,7 @@ public abstract class pesawatPlayer extends pesawat{
         //awal game dimulai pasti dia ga punya shield
         this.shieldActive = -1;
         this.listPeluru = new ArrayList<>();
+        powerUP = "";
         try {
             this.gbrShield = ImageIO.read(new File("images/shield.png"));
         } catch (IOException ex) {
@@ -71,12 +74,18 @@ public abstract class pesawatPlayer extends pesawat{
     public void powerUp(int jenisPowerUp){
         if(jenisPowerUp == 0){
             hp += 20;
+            powerUP = "You got HP + 20.";
+            ctrPowerUp = 25;
         }
         else if(jenisPowerUp == 1){
             shieldActive = 300;
+            powerUP = "You got 15s Shield.";
+            ctrPowerUp = 25;
         }
         else if(jenisPowerUp == 3){
             damagePesawat += 20;
+            powerUP = "You got Damage + 20.";
+            ctrPowerUp = 25;
         }
     }
     

@@ -70,6 +70,12 @@ public class panelGame extends javax.swing.JPanel {
                     gameSpace.ketembak();
                     gameSpace.checkPesawatMelewatiLayar();
                     gameSpace.checkPeluruMelewatiLayar();
+                    if(((pesawatPlayer)gameSpace.player).ctrPowerUp > 0){
+                        ((pesawatPlayer)gameSpace.player).ctrPowerUp--;
+                    }
+                    else{
+                        ((pesawatPlayer)gameSpace.player).powerUP = "";
+                    }
                     if(gameSpace.player.hp<=0){
                         tmr.stop();
                         JOptionPane.showMessageDialog(null, "!!!!  Game Over!!!!");
@@ -82,7 +88,7 @@ public class panelGame extends javax.swing.JPanel {
     }
     private void newGame(){
         gameSpace = new game(newPlayerName.namaPlayer, 1, LoginFrame.mode);
-        gameSpace.setPlayer(new pesawatSingleShooter(100, 250, 450));
+        gameSpace.setPlayer(new pesawatSingleShooter(100, 250, 450, 0, ""));
         gameSpace.randomMusuh();
     }
     public void LoadGame(game gg){

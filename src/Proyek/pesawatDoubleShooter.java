@@ -8,8 +8,10 @@ import javax.imageio.ImageIO;
 
 public class pesawatDoubleShooter extends pesawatPlayer {
 
-    public pesawatDoubleShooter(int hp, int x, int y) {
+    public pesawatDoubleShooter(int hp, int x, int y, int ctrPowerUp, String powerUP) {
         super(hp, x, y);
+        this.ctrPowerUp = ctrPowerUp;
+        this.powerUP = powerUP;
         try {
             this.gbrPesawat = ImageIO.read(new File("images/p2.png"));
         } catch (IOException ex) {
@@ -19,7 +21,9 @@ public class pesawatDoubleShooter extends pesawatPlayer {
 
     @Override
     public pesawatPlayer evolve() {
-        return new pesawatTripleShooter(hp, posX, posY);
+        powerUP = "You got Evolved to Triple Shooter";
+        ctrPowerUp = 25;
+        return new pesawatTripleShooter(hp, posX, posY, ctrPowerUp, powerUP);
     }
     
     @Override
