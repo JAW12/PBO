@@ -21,6 +21,7 @@ public class game implements Serializable{
     protected ArrayList<pesawat> listMusuh;
     protected pesawat player;
     protected transient BufferedImage jpg;
+    protected int y1, y2;
     protected String gameMode;
     
     public game(String nama,int stage, int difficulty) {
@@ -29,9 +30,10 @@ public class game implements Serializable{
         this.score = 0;
         this.listMusuh = new ArrayList<>();
         this.difficultyLevel = difficulty;
-        
+        this.y1 = -550;
+        this.y2 = 0;
         try {
-            jpg = ImageIO.read(new File("images/bg2.jpg"));
+            jpg = ImageIO.read(new File("images/bg.gif"));
         } catch (IOException ex) {
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -54,7 +56,7 @@ public class game implements Serializable{
     public void loadGambar()
     {
         try {
-            jpg = ImageIO.read(new File("images/bg2.jpg"));
+            jpg = ImageIO.read(new File("images/bg.gif"));
         } catch (IOException ex) {
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -187,6 +189,7 @@ public class game implements Serializable{
             for(pesawat p : this.listMusuh){
                 if(pewpew.bounds().intersects(p.bounds())){
                     p.hp = p.hp-pewpew.damage;
+                    p.ctrLedak = 0;
                     idxHapus.add(pewpew);
                 }
             }           
@@ -228,6 +231,7 @@ public class game implements Serializable{
                     if(pewpew.bounds().intersects(this.player.bounds())){
                         tembak = true;
                         if(((pesawatPlayer)player).shieldActive<=0){
+                            this.player.ctrLedak = 0;
                             if(this.difficultyLevel == 1)
                             this.player.hp-=20;
                             else if(this.difficultyLevel == 2)
@@ -257,7 +261,8 @@ public class game implements Serializable{
     
     public void drawGame(Graphics grphcs){
         Graphics2D g2 = (Graphics2D)grphcs;
-        g2.drawImage(jpg,0,0,550,550,null);
+        g2.drawImage(jpg,0,y1,550,550,null);
+        g2.drawImage(jpg,0,y2,550,550,null);
         Font f = new Font("ARIAL",Font.BOLD, 17);
         g2.setFont(f);
         g2.setColor(Color.WHITE);

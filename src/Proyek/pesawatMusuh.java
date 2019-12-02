@@ -58,7 +58,10 @@ public class pesawatMusuh extends pesawat{
                 default:
                     break;
             }
-            
+            gbrLedak[0] = ImageIO.read(new File("images/expp1.png"));
+            gbrLedak[1] = ImageIO.read(new File("images/expp2.png"));
+            gbrLedak[2] = ImageIO.read(new File("images/expp3.png"));
+            gbrLedak[3] = ImageIO.read(new File("images/expp4.png"));
             
             this.listPeluru = new ArrayList<>();
             this.idxHapus = new ArrayList<>();

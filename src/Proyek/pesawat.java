@@ -9,9 +9,13 @@ import java.io.Serializable;
 public abstract class pesawat implements Serializable{
     protected int hp, posX, posY, mX, mY, width, height;
     transient BufferedImage gbrPesawat;
+    protected int ctrLedak;
+    transient BufferedImage[] gbrLedak;
     protected int damagePesawat;
 
     public pesawat(int hp, int posX, int posY) {
+        this.ctrLedak = -1;
+        gbrLedak = new BufferedImage[4];
         this.hp = hp;
         this.posX = posX;
         this.posY = posY;
@@ -88,6 +92,10 @@ public abstract class pesawat implements Serializable{
     public void draw(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
         g2.drawImage(gbrPesawat, posX, posY, width, height, null);
+        if(ctrLedak >= 0 && ctrLedak <= 7){
+            g2.drawImage(gbrLedak[ctrLedak / 2], posX+3, posY+3, width-7, height-7, null);
+            ctrLedak++;
+        }
     }
     
     public void movePlayer(String keyMove){

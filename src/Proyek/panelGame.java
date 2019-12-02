@@ -80,6 +80,15 @@ public class panelGame extends javax.swing.JPanel {
                         tmr.stop();
                         JOptionPane.showMessageDialog(null, "!!!!  Game Over!!!!");
                     }
+                    gameSpace.y1 += 5;
+                    gameSpace.y2 += 5;
+                    if(gameSpace.y1 >= 550){
+                        gameSpace.y1 = -550;
+                    }
+                    if(gameSpace.y2 >= 550){
+                        gameSpace.y2 = -550;
+                    }
+                    
                     repaint();
                 }
             });
@@ -179,7 +188,7 @@ public class panelGame extends javax.swing.JPanel {
     }//GEN-LAST:event_btnPauseMouseClicked
 
     private void btnPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPauseActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnPauseActionPerformed
 
     private void setPauseGame(){

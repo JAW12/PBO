@@ -34,10 +34,13 @@ public abstract class pesawatPlayer extends pesawat{
         powerUP = "";
         try {
             this.gbrShield = ImageIO.read(new File("images/shield.png"));
+            gbrLedak[0] = ImageIO.read(new File("images/expm1.png"));
+            gbrLedak[1] = ImageIO.read(new File("images/expm2.png"));
+            gbrLedak[2] = ImageIO.read(new File("images/expm3.png"));
+            gbrLedak[3] = ImageIO.read(new File("images/expm4.png"));
         } catch (IOException ex) {
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 
     @Override
@@ -97,7 +100,10 @@ public abstract class pesawatPlayer extends pesawat{
             shieldActive--;
         }
         g2.drawImage(gbrPesawat, posX, posY, width, height, null);
-        
+        if(ctrLedak >= 0 && ctrLedak <= 7){
+            g2.drawImage(gbrLedak[ctrLedak / 2], posX+3, posY+3, width-7, height-7, null);
+            ctrLedak++;
+        }
     }
     
     public abstract pesawatPlayer evolve();
