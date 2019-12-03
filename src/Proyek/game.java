@@ -23,8 +23,12 @@ public class game implements Serializable{
     protected transient BufferedImage jpg;
     protected int y1, y2;
     protected String gameMode;
+    protected int tmrStage;
+    protected int musuh;
     
     public game(String nama,int stage, int difficulty) {
+        this.tmrStage = -1;
+        this.musuh = 0;
         this.nama = nama;
         this.stage = stage;
         this.score = 0;
@@ -114,10 +118,15 @@ public class game implements Serializable{
     
     public void nextStage(){
         if (this.getListMusuh().size() <= 0) {
-            this.setStage(this.getStage() + 1);
-            randomMusuh();
-            System.out.println("pergantian stage. Stage saat ini : " + this.getStage());
-            this.score += 100;
+            if(tmrStage == -1){
+                this.setStage(this.getStage() + 1);
+                randomMusuh();
+                System.out.println("pergantian stage. Stage saat ini : " + this.getStage());
+                this.score += 100;
+            }
+             if(tmrStage < 0){
+                tmrStage = 0;
+            }
         }
     }
     
@@ -172,11 +181,15 @@ public class game implements Serializable{
         pesawat tabrak = null;
         for(pesawat p : this.listMusuh){
             if(this.getPlayer().bounds().intersects(p.bounds())){
-                tabrak = p;
-                if(((pesawatPlayer)player).shieldActive<=0){
+                
+                if(((pesawatPlayer)player).shieldActive<=0 && p.ctrLedak == -1){
+                    tabrak = p;
                     this.player.hp-=50;
+                    this.player.ctrLedak = 0;
+                    this.player.temtab = 1;
                 }
-                else{
+                else if(p.ctrLedak == -1){
+                    tabrak = p;
                     this.score+=20;
                 }
                 if(this.player.hp <= 0)
@@ -184,7 +197,21 @@ public class game implements Serializable{
             }
         }
         if(tabrak != null){
-            this.listMusuh.remove(tabrak);
+            if(tabrak.ctrLedak < 0){
+                tabrak.ctrLedak = 0;
+            }
+        }
+    }
+    
+    public void ledak(){
+        pesawat ledak = null;
+        for(pesawat p : this.listMusuh){
+            if(p.ctrLedak >= 3){
+                ledak = p;
+            }
+        }
+        if(ledak != null){
+            this.listMusuh.remove(ledak);
         }
     }
     ArrayList<peluru> idxHapus;
@@ -194,7 +221,7 @@ public class game implements Serializable{
             for(pesawat p : this.listMusuh){
                 if(pewpew.bounds().intersects(p.bounds())){
                     p.hp = p.hp-pewpew.damage;
-                    p.ctrLedak = 0;
+                    p.tmrDim = 2;
                     idxHapus.add(pewpew);
                 }
             }           
@@ -213,19 +240,6 @@ public class game implements Serializable{
             }
         }
     }
-    public void musuhmati(){
-        for (pesawat p : this.listMusuh) {
-            if(p.hp <= 0){
-                System.out.println(((pesawatMusuh)p).jenisPowerUp);
-                if(((pesawatMusuh)p).jenisPowerUp != 2){
-                    ((pesawatPlayer)player).powerUp((((pesawatMusuh)p).jenisPowerUp));
-                }
-                else{
-                    player = ((pesawatPlayer)player).evolve();
-                }
-            }
-        }
-    }
     
     public void ketembak(){
         boolean tembak = false;
@@ -236,6 +250,7 @@ public class game implements Serializable{
                     if(pewpew.bounds().intersects(this.player.bounds())){
                         tembak = true;
                         if(((pesawatPlayer)player).shieldActive<=0){
+                            this.player.temtab = 0;
                             this.player.ctrLedak = 0;
                             if(this.difficultyLevel == 1)
                             this.player.hp-=20;
@@ -270,6 +285,24 @@ public class game implements Serializable{
         Graphics2D g2 = (Graphics2D)grphcs;
         g2.drawImage(jpg,0,y1,550,550,null);
         g2.drawImage(jpg,0,y2,550,550,null);
+        if(this.player != null){
+            this.getPlayer().draw(grphcs);    
+        }
+        for (pesawat p : this.getListMusuh()) {
+            p.draw(grphcs);
+            g2.setColor(Color.red);
+            g2.fillRect(p.posX+3-this.getStage(), p.posY-6, (int)((double)p.hp/100 * 35), 5);
+        }
+        if(this.player != null){
+            for (peluru p : ((pesawatPlayer)this.getPlayer()).getListPeluru()){
+                p.draw(grphcs);
+            }
+        }
+        for (pesawat p : this.listMusuh) {
+            for (peluru pl : ((pesawatMusuh)p).listPeluru){
+                pl.draw(grphcs);
+            }
+        }
         Font f = new Font("ARIAL",Font.BOLD, 17);
         g2.setFont(f);
         g2.setColor(Color.WHITE);
@@ -283,39 +316,38 @@ public class game implements Serializable{
         g2.drawString("Stage : " + this.stage, 325, 60);
         if(!((pesawatPlayer)this.player).powerUP.equals("")){
             if(!((pesawatPlayer)this.player).powerUP.contains("Evolved")){
-                g2.drawString(((pesawatPlayer)this.player).powerUP, 175, 450);
+                g2.drawString(((pesawatPlayer)this.player).powerUP, 175, 435);
             }
             else{
-                g2.drawString(((pesawatPlayer)this.player).powerUP, 115, 450);
+                g2.drawString(((pesawatPlayer)this.player).powerUP, 115, 435);
             }
-            
+        }
+        if(tmrStage >= 0){
+            if(tmrStage >= 10){
+                g2.setFont(new Font("Arial", 1, 32));
+                g2.drawString("Stage " + stage, 200, 250);
+                g2.setFont(new Font("Arial", 1, 16));
+                g2.drawString(this.listMusuh.size() + " Enemies", 215, 275);
+            }
+            tmrStage++;
+            if(tmrStage >= 75){
+                tmrStage = -1;
+            }
+        }
+        if(((pesawatPlayer)this.player).shieldActive >= 0){
+            g2.setColor(Color.CYAN);
+            g2.fillRect(15, 450,(int)(((pesawatPlayer)this.player).shieldActive*1.5), 10);
         }
         
-        if(this.player != null){
-            this.getPlayer().draw(grphcs);    
-        }
-        for (pesawat p : this.getListMusuh()) {
-            p.draw(grphcs);
-        }
-        if(this.player != null){
-            for (peluru p : ((pesawatPlayer)this.getPlayer()).getListPeluru()){
-                p.draw(grphcs);
-            }
-        }
-        for (pesawat p : this.listMusuh) {
-            for (peluru pl : ((pesawatMusuh)p).listPeluru){
-                pl.draw(grphcs);
-            }
-        }
     }
     
     public Boolean isMelewatiLayar(pesawat p){
         Boolean lewat = false;
-        if (p.getPosX() + p.getWidth() >= 540) {
+        if (p.getPosX() + p.getWidth() >= 550) {
             lewat = true;
         }
         
-        if (p.getPosY() + p.getHeight() >= 540) {
+        if (p.getPosY() + p.getHeight() >= 550) {
             lewat = true;
         }
         
@@ -324,11 +356,11 @@ public class game implements Serializable{
     
      public Boolean isPeluruMelewatiLayar(peluru p){
         Boolean lewat = false;
-        if (p.getPosX()  <= 0) {
+        if (p.getPosX()  <= -10) {
             lewat = true;
         }
         
-        if (p.getPosY() <=  0) {
+        if (p.getPosY() <=  -10) {
             lewat = true;
         }
         
@@ -338,6 +370,9 @@ public class game implements Serializable{
     public Boolean isMati(pesawat p){
         Boolean mati = false;
         if(p.hp < 0){
+            if(p.ctrLedak < 0){
+                p.ctrLedak = 0;
+            }
             mati = true;
         }
         
@@ -362,7 +397,14 @@ public class game implements Serializable{
     
     public void checkPesawatMati(){
         for (int i = 0; i < this.listMusuh.size(); i++) {
-            if (isMati(this.listMusuh.get(i))) {
+            if (isMati(this.listMusuh.get(i)) && this.listMusuh.get(i).ctrLedak >= 3) {
+                System.out.println(((pesawatMusuh)this.listMusuh.get(i)).jenisPowerUp);
+                if(((pesawatMusuh)this.listMusuh.get(i)).jenisPowerUp != 2){
+                    ((pesawatPlayer)player).powerUp((((pesawatMusuh)this.listMusuh.get(i)).jenisPowerUp));
+                }
+                else{
+                    player = ((pesawatPlayer)player).evolve();
+                }
                 this.listMusuh.remove(i);
                 this.score += 20;
             }

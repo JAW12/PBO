@@ -26,7 +26,7 @@ public class panelNewPlayerName extends javax.swing.JPanel {
      * Creates new form panelNewPlayerName
      */
     BufferedImage bgIntro;
-    
+    newPlayerName form;
     public panelNewPlayerName() {
         try {
             initComponents();
@@ -121,6 +121,7 @@ public class panelNewPlayerName extends javax.swing.JPanel {
         String nama = txtNama.getText();
         if (!nama.equals("") && nama.length() >= 3) {
             this.setVisible(false);
+            form.setVisible(false);
             newPlayerName.namaPlayer = nama;
 
             formGameSpace f_game = new formGameSpace();

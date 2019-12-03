@@ -2,14 +2,17 @@ package Proyek;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 public class pesawatTripleShooter extends pesawatPlayer{
     
-    public pesawatTripleShooter(int hp, int x, int y, int ctrPowerUp, String powerUP) {
+    public pesawatTripleShooter(int hp, int x, int y, int ctrPowerUp, String powerUP, ArrayList<peluru> peluru, int shield) {
         super(hp, x, y);
+        this.listPeluru = peluru;
+        this.shieldActive = shield;
         this.ctrPowerUp = ctrPowerUp;
         this.powerUP = powerUP;
         try {
@@ -21,7 +24,7 @@ public class pesawatTripleShooter extends pesawatPlayer{
 
     @Override
     public pesawatPlayer evolve() {
-        return new pesawatTripleShooter(hp, posX, posY, ctrPowerUp, powerUP);
+        return new pesawatTripleShooter(hp, posX, posY, ctrPowerUp, powerUP, listPeluru, shieldActive);
     }
     
     @Override

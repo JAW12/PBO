@@ -104,7 +104,7 @@ public class pesawatMusuh extends pesawat{
     
     public void setRandomPosY(){
         Random rnd = new Random();
-        this.posY = rnd.nextInt(500 + 1) - 500;
+        this.posY = rnd.nextInt(450 + 1) - 500;
     }
     
 }

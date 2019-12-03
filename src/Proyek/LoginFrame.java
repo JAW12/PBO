@@ -49,17 +49,42 @@ public class LoginFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jLabel1 = new javax.swing.JLabel();
         loginPanel1 = new Proyek.LoginPanel();
         btnStart = new javax.swing.JButton();
         btnLoad = new javax.swing.JButton();
         btnSound = new javax.swing.JButton();
         cbMode = new javax.swing.JComboBox<>();
+        btnHelp = new javax.swing.JButton();
+
+        jDialog1.setAlwaysOnTop(true);
+        jDialog1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jDialog1.setMaximumSize(new java.awt.Dimension(505, 525));
+        jDialog1.setMinimumSize(new java.awt.Dimension(505, 525));
+        jDialog1.setModal(true);
+        jDialog1.setPreferredSize(new java.awt.Dimension(505, 525));
+        jDialog1.setResizable(false);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\KULIAH STTS\\SEMESTER 3\\PBO\\PROYEK\\CODINGAN\\PROYEK-PBO-SPACESHOOTER\\images\\help.jpg")); // NOI18N
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         loginPanel1.setPreferredSize(new java.awt.Dimension(500, 500));
 
         btnStart.setBackground(java.awt.SystemColor.windowBorder);
+        btnStart.setForeground(new java.awt.Color(255, 255, 255));
         btnStart.setText("Start Game");
         btnStart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -73,6 +98,7 @@ public class LoginFrame extends javax.swing.JFrame {
         });
 
         btnLoad.setBackground(java.awt.SystemColor.windowBorder);
+        btnLoad.setForeground(new java.awt.Color(255, 255, 255));
         btnLoad.setText("Load Game");
         btnLoad.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -94,12 +120,25 @@ public class LoginFrame extends javax.swing.JFrame {
 
         cbMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Easy", "Medium", "Hard" }));
 
+        btnHelp.setText("Help");
+        btnHelp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHelpMouseClicked(evt);
+            }
+        });
+        btnHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHelpActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout loginPanel1Layout = new javax.swing.GroupLayout(loginPanel1);
         loginPanel1.setLayout(loginPanel1Layout);
         loginPanel1Layout.setHorizontalGroup(
             loginPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSound, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(loginPanel1Layout.createSequentialGroup()
                 .addGap(102, 102, 102)
@@ -109,19 +148,21 @@ public class LoginFrame extends javax.swing.JFrame {
                         .addComponent(btnStart)
                         .addGap(18, 18, 18)
                         .addComponent(btnLoad)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(203, Short.MAX_VALUE))
         );
         loginPanel1Layout.setVerticalGroup(
             loginPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanel1Layout.createSequentialGroup()
-                .addContainerGap(307, Short.MAX_VALUE)
+                .addContainerGap(351, Short.MAX_VALUE)
                 .addComponent(cbMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(loginPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
-                .addComponent(btnSound))
+                .addGroup(loginPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSound)
+                    .addComponent(btnHelp)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -205,6 +246,16 @@ public class LoginFrame extends javax.swing.JFrame {
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnStartActionPerformed
+
+    private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHelpActionPerformed
+
+    private void btnHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHelpMouseClicked
+        jDialog1.setLocationRelativeTo(this);
+        jDialog1.setLocation(this.getX() + this.getWidth()+ 10, this.getY());
+        jDialog1.setVisible(true);
+    }//GEN-LAST:event_btnHelpMouseClicked
 
     /**
      * @param args the command line arguments
@@ -298,10 +349,13 @@ public class LoginFrame extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHelp;
     private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnSound;
     private javax.swing.JButton btnStart;
     private javax.swing.JComboBox<String> cbMode;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JLabel jLabel1;
     private Proyek.LoginPanel loginPanel1;
     // End of variables declaration//GEN-END:variables
 }

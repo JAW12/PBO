@@ -100,8 +100,15 @@ public abstract class pesawatPlayer extends pesawat{
             shieldActive--;
         }
         g2.drawImage(gbrPesawat, posX, posY, width, height, null);
-        if(ctrLedak >= 0 && ctrLedak <= 7){
-            g2.drawImage(gbrLedak[ctrLedak / 2], posX+3, posY+3, width-7, height-7, null);
+        if(ctrLedak >= 0 && ctrLedak <= 7 && temtab == 0){
+            int ukuran = (int)(Math.random()*(width-7))+10;
+            int x = (int)(Math.random()*10)+posX;
+            int y = (int)(Math.random()*10)+posY;
+            g2.drawImage(gbrLedak[ctrLedak / 2], x, y, ukuran, ukuran, null);
+            ctrLedak++;
+        }
+        else if(ctrLedak >= 0 && ctrLedak <= 7 && temtab == 1){
+            g2.drawImage(gbrLedak[ctrLedak / 2], posX-3, posY-3, width+7, height+7, null);
             ctrLedak++;
         }
     }

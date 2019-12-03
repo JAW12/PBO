@@ -2,6 +2,7 @@ package Proyek;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -23,7 +24,7 @@ public class pesawatSingleShooter extends pesawatPlayer{
     public pesawatPlayer evolve() {
         powerUP = "You got Evolved to Double Shooter";
         ctrPowerUp = 25;
-        return new pesawatDoubleShooter(hp, posX, posY, ctrPowerUp, powerUP);
+        return new pesawatDoubleShooter(hp, posX, posY, ctrPowerUp, powerUP, listPeluru, shieldActive);
     }
 
     @Override

@@ -76,9 +76,9 @@ public class panelGame extends javax.swing.JPanel {
                     }
                     gameSpace.tabrak();
                     gameSpace.nembak();
-                    gameSpace.musuhmati();
                     gameSpace.checkPesawatMati();
                     gameSpace.ketembak();
+                    gameSpace.ledak();
                     gameSpace.checkPesawatMelewatiLayar();
                     gameSpace.checkPeluruMelewatiLayar();
                     if(((pesawatPlayer)gameSpace.player).ctrPowerUp > 0){

@@ -17,6 +17,7 @@ public class newPlayerName extends javax.swing.JFrame {
     public newPlayerName() {
         initComponents();
         LoginFrame.soundEffect(LoginFrame.soundOn);
+        panelNewPlayerName1.form = this;
         
     }
 

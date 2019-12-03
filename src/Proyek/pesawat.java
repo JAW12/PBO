@@ -1,6 +1,6 @@
 package Proyek;
 
-import java.awt.Color;
+import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -12,11 +12,15 @@ public abstract class pesawat implements Serializable{
     transient BufferedImage gbrPesawat;
     protected int ctrLedak;
     transient BufferedImage[] gbrLedak;
+    protected int tmrDim;
     protected int damagePesawat;
+    protected int temtab;
 
     public pesawat(int hp, int posX, int posY) {
+        this.temtab = -1;
+        this.tmrDim = -1;
         this.ctrLedak = -1;
-        gbrLedak = new BufferedImage[4];
+        this.gbrLedak = new BufferedImage[4];
         this.hp = hp;
         this.posX = posX;
         this.posY = posY;
@@ -92,13 +96,17 @@ public abstract class pesawat implements Serializable{
     
     public void draw(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
-        g2.drawImage(gbrPesawat, posX, posY, width, height, null);
-        if(ctrLedak >= 0 && ctrLedak <= 7){
-            g2.drawImage(gbrLedak[ctrLedak / 2], posX+3, posY+3, width-7, height-7, null);
-            ctrLedak++;
-            g2.setColor(Color.red);
-            g2.fillRect(posX, posY-4, hp/5, 5);
+        if(tmrDim >= 0){
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
+            tmrDim--;
         }
+        g2.drawImage(gbrPesawat, posX, posY, width, height, null);    
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+        if(ctrLedak >= 0 && ctrLedak <= 3){
+            g2.drawImage(gbrLedak[ctrLedak], posX, posY, width, height, null);
+            ctrLedak++;
+        }
+        
     }
     
     public void movePlayer(String keyMove){
