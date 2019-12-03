@@ -12,9 +12,12 @@ public class newPlayerName extends javax.swing.JFrame {
      * Creates new form newPlayerName
      */
     static String namaPlayer;
+    public LoginFrame formLogin;
+    
     public newPlayerName() {
         initComponents();
         LoginFrame.soundEffect(LoginFrame.soundOn);
+        
     }
 
     /**

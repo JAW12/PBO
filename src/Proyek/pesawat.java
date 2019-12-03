@@ -1,5 +1,6 @@
 package Proyek;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -95,6 +96,8 @@ public abstract class pesawat implements Serializable{
         if(ctrLedak >= 0 && ctrLedak <= 7){
             g2.drawImage(gbrLedak[ctrLedak / 2], posX+3, posY+3, width-7, height-7, null);
             ctrLedak++;
+            g2.setColor(Color.red);
+            g2.fillRect(posX, posY-4, hp/5, 5);
         }
     }
     

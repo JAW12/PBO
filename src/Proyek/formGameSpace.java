@@ -1,6 +1,7 @@
 package Proyek;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class formGameSpace extends javax.swing.JFrame {
 
@@ -8,12 +9,18 @@ public class formGameSpace extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         LoginFrame.soundEffect(LoginFrame.soundOn);
+        panelGame1.formGame = getMe();
     }
     public formGameSpace(game ggg) {
         initComponents();
         this.setResizable(false);
         panelGame1.LoadGame(ggg);
+        panelGame1.formGame = getMe();
         LoginFrame.soundEffect(LoginFrame.soundOn);
+    }
+    
+    private formGameSpace getMe(){
+        return this;
     }
 
     @SuppressWarnings("unchecked")

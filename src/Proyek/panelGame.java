@@ -17,6 +17,7 @@ public class panelGame extends javax.swing.JPanel {
     public String namaPlayer;
     float ctrWaktu;
     int ctrTembak;
+    public formGameSpace formGame;
     
     public panelGame() {
         initComponents();
@@ -28,6 +29,16 @@ public class panelGame extends javax.swing.JPanel {
             runawal();
         }
     }
+    
+    private void gameOver(){
+        if(tmr.isRunning() == false){
+            formGame.setVisible(false);
+            LoginFrame formlogin = new LoginFrame();
+            formlogin.setLocationRelativeTo(null);
+            formlogin.setVisible(true);
+        }
+    }
+    
     private void runawal()
     {
         gameSpace.loadGambar();
@@ -78,7 +89,8 @@ public class panelGame extends javax.swing.JPanel {
                     }
                     if(gameSpace.player.hp<=0){
                         tmr.stop();
-                        JOptionPane.showMessageDialog(null, "!!!!  Game Over!!!!");
+                        JOptionPane.showMessageDialog(null, "!!!!  Game Over  !!!!");
+                        gameOver();
                     }
                     gameSpace.y1 += 5;
                     gameSpace.y2 += 5;

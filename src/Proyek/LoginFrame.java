@@ -25,6 +25,7 @@ public class LoginFrame extends javax.swing.JFrame {
     static AudioInputStream audioInputStream;
     static Clip clip;
     static boolean soundOn;
+    
     public LoginFrame() {
         this.setResizable(false);
         this.soundOn = false;

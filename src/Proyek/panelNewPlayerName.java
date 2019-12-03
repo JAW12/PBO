@@ -26,6 +26,7 @@ public class panelNewPlayerName extends javax.swing.JPanel {
      * Creates new form panelNewPlayerName
      */
     BufferedImage bgIntro;
+    
     public panelNewPlayerName() {
         try {
             initComponents();
@@ -116,7 +117,6 @@ public class panelNewPlayerName extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_GoActionPerformed
 
-    
     public void startGame(){
         String nama = txtNama.getText();
         if (!nama.equals("") && nama.length() >= 3) {

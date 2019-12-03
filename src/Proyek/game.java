@@ -176,6 +176,11 @@ public class game implements Serializable{
                 if(((pesawatPlayer)player).shieldActive<=0){
                     this.player.hp-=50;
                 }
+                else{
+                    this.score+=20;
+                }
+                if(this.player.hp <= 0)
+                    this.player.hp=0;
             }
         }
         if(tabrak != null){
@@ -238,6 +243,8 @@ public class game implements Serializable{
                             this.player.hp-=40;
                             else if(this.difficultyLevel == 3)
                             this.player.hp-=60;
+                            if(this.player.hp <= 0)
+                            this.player.hp=0;
                         }
                         ((pesawatMusuh)p).idxHapus.add(pewpew);
                     }
@@ -268,7 +275,10 @@ public class game implements Serializable{
         g2.setColor(Color.WHITE);
         g2.drawString("Player : " + newPlayerName.namaPlayer.toUpperCase(), 5, 30);
         g2.drawString("Score  : " + this.score, 5, 60);
-        g2.drawString("Hp : " + this.player.getHp(), 5, 90);
+        g2.setColor(Color.RED);
+        g2.fillRect(45, 80, ((pesawatPlayer)this.player).hp, 10);
+        g2.setColor(Color.WHITE);
+        g2.drawString("Hp : ", 5, 90);
         g2.drawString("Mode : " + this.gameMode, 325, 30);
         g2.drawString("Stage : " + this.stage, 325, 60);
         if(!((pesawatPlayer)this.player).powerUP.equals("")){
