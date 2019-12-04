@@ -63,7 +63,7 @@ public class formMenuInGame extends javax.swing.JFrame {
         jDialog1.setPreferredSize(new java.awt.Dimension(505, 525));
         jDialog1.setResizable(false);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\KULIAH STTS\\SEMESTER 3\\PBO\\PROYEK\\CODINGAN\\PROYEK-PBO-SPACESHOOTER\\images\\help.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Proyek/help.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);

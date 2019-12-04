@@ -61,7 +61,7 @@ public class game implements Serializable{
      public void loadGambar()
     {
         try {
-            jpg = ImageIO.read(new File("images/bg2.jpg"));
+            jpg = ImageIO.read(new File("images/bg.gif"));
         } catch (IOException ex) {
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }

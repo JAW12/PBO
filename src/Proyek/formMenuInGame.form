@@ -37,7 +37,7 @@
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\KULIAH STTS\SEMESTER 3\PBO\PROYEK\CODINGAN\PROYEK-PBO-SPACESHOOTER\images\help.jpg"/>
+              <Image iconType="3" name="/Proyek/help.jpg"/>
             </Property>
           </Properties>
         </Component>
