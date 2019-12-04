@@ -21,7 +21,15 @@ public class pesawatTripleShooter extends pesawatPlayer{
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    public void loadGambar()
+    {
+        try {
+            this.gbrPesawat = ImageIO.read(new File("images/p3.png"));
+            super.loadGambar();
+        } catch (IOException ex) {
+            Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     @Override
     public pesawatPlayer evolve() {
         return new pesawatTripleShooter(hp, posX, posY, ctrPowerUp, powerUP, listPeluru, shieldActive);

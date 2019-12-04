@@ -1,5 +1,6 @@
 package Proyek;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -69,7 +70,46 @@ public class pesawatMusuh extends pesawat{
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+     public void loadGambar()
+    {
+        try {
+            this.gbrLedak = new BufferedImage[4];
+            gbrLedak[0] = ImageIO.read(new File("images/expp1.png"));
+            gbrLedak[1] = ImageIO.read(new File("images/expp2.png"));
+            gbrLedak[2] = ImageIO.read(new File("images/expp3.png"));
+            gbrLedak[3] = ImageIO.read(new File("images/expp4.png"));
+            switch (this.jenisPesawat) {
+                case 1:
+                    this.gbrPesawat = ImageIO.read(new File("images/enemy.png"));
+                    break;
+                case 2:
+                    this.posX = 5;
+                    this.gbrPesawat = ImageIO.read(new File("images/enemyBlue1.png"));
+                    break;
+                case 3:
+                    this.posX = 480 - width;
+                    this.gbrPesawat = ImageIO.read(new File("images/enemyRed1.png"));
+                    break;
+                default:
+                    break;
+            }
+            
+            
+            //this.listPeluru = new ArrayList<>();
+            //this.idxHapus = new ArrayList<>();
+        } catch (IOException ex) {
+            Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void loadGambarPeluru()
+    {
+        for (int i = 0; i < listPeluru.size(); i++) {
+            listPeluru.get(i).loadGambar();
+        }
+        for (int i = 0; i < idxHapus.size(); i++) {
+            idxHapus.get(i).loadGambar();
+        }
+    }
     
     @Override
     public void shoot(){

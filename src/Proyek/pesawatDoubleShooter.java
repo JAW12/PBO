@@ -21,7 +21,14 @@ public class pesawatDoubleShooter extends pesawatPlayer {
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    public void loadGambar(){
+         try {
+            this.gbrPesawat = ImageIO.read(new File("images/p2.png"));
+            super.loadGambar();                      
+        } catch (IOException ex) {
+            Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     @Override
     public pesawatPlayer evolve() {
         powerUP = "You got Evolved to Triple Shooter";

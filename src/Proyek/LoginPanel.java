@@ -1,9 +1,13 @@
 package Proyek;
 
+import static Proyek.panelGame.namaHiScore;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +24,7 @@ public class LoginPanel extends javax.swing.JPanel {
      */
     public LoginPanel() {
         initComponents();
+        bacascore();
     }
 
     @Override
@@ -37,7 +42,22 @@ public class LoginPanel extends javax.swing.JPanel {
         gifBackground.setEnabled(false);
         add(gifBackground);
     }
-    
+    public void bacascore()
+    {
+        String name="";
+         try  {  
+            FileReader r=new FileReader("hs.txt");    
+            BufferedReader br=new BufferedReader(r);           
+            name=br.readLine();
+            br.close();    
+            r.close();
+            String[] baca = name.split("-");
+            panelGame.namaHiScore = baca[0];
+            panelGame.scoreHiScore= Integer.parseInt(baca[1]);
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+    }
     public void paintBGManual(Graphics g){
         try {
             jpg = ImageIO.read(new File("images/bg2.jpg"));
@@ -123,6 +143,9 @@ public class LoginPanel extends javax.swing.JPanel {
         }
         g2 = (Graphics2D)g;
         g2.drawImage(jpg,10,-20,400,300,null);
+        g2.setColor(Color.white);
+        g2.drawString("High Score = " +panelGame.scoreHiScore,100,20);
+        g2.drawString("Nama       = " +panelGame.namaHiScore ,250,20);
     }
 
     /**

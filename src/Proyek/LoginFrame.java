@@ -199,7 +199,7 @@ public class LoginFrame extends javax.swing.JFrame {
             default:
                 break;
         }
-        
+        LOADGAME=false;
         this.setVisible(false);
         newPlayerName f_playername = new newPlayerName();
         f_playername.setLocationRelativeTo(null);

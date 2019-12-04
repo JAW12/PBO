@@ -42,7 +42,21 @@ public abstract class pesawatPlayer extends pesawat{
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    public void loadGambar()
+    {
+        try {
+                this.gbrShield = ImageIO.read(new File("images/shield.png"));
+                loadGambarPeluru();
+        } catch (IOException ex) {
+            Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void loadGambarPeluru()
+    {
+        for (int i = 0; i < listPeluru.size(); i++) {
+            listPeluru.get(i).loadGambar();
+        }
+    }
     @Override
     public abstract void shoot();
 
@@ -92,6 +106,18 @@ public abstract class pesawatPlayer extends pesawat{
         }
     }
     
+    public void loadgambarledakan()
+    {
+        try {
+            this.gbrLedak = new BufferedImage[4];
+            gbrLedak[0] = ImageIO.read(new File("images/expm1.png"));
+            gbrLedak[1] = ImageIO.read(new File("images/expm2.png"));
+            gbrLedak[2] = ImageIO.read(new File("images/expm3.png"));
+            gbrLedak[3] = ImageIO.read(new File("images/expm4.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(pesawatPlayer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     @Override
     public void draw(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
@@ -99,11 +125,15 @@ public abstract class pesawatPlayer extends pesawat{
             g2.drawImage(gbrShield, posX-12, posY-12, width+25, height+25, null);
             shieldActive--;
         }
+        if (gbrLedak == null){
+                loadgambarledakan();
+            }
         g2.drawImage(gbrPesawat, posX, posY, width, height, null);
         if(ctrLedak >= 0 && ctrLedak <= 7 && temtab == 0){
             int ukuran = (int)(Math.random()*(width-7))+10;
             int x = (int)(Math.random()*10)+posX;
             int y = (int)(Math.random()*10)+posY;
+            
             g2.drawImage(gbrLedak[ctrLedak / 2], x, y, ukuran, ukuran, null);
             ctrLedak++;
         }

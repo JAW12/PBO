@@ -1,3 +1,4 @@
+
 package Proyek;
 
 import java.awt.Color;
@@ -57,13 +58,18 @@ public class game implements Serializable{
         }
     }
 
-    public void loadGambar()
+     public void loadGambar()
     {
         try {
-            jpg = ImageIO.read(new File("images/bg.gif"));
+            jpg = ImageIO.read(new File("images/bg2.jpg"));
         } catch (IOException ex) {
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+        for (int i = 0; i < listMusuh.size(); i++) {
+            listMusuh.get(i).loadGambar();
+            ((pesawatMusuh)listMusuh.get(i)).loadGambarPeluru();
+        }
+        ((pesawatPlayer)player).loadGambar();
     }
     public game getMe(){
         return this;

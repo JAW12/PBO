@@ -5,7 +5,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 public abstract class pesawat implements Serializable{
     protected int hp, posX, posY, mX, mY, width, height;
@@ -29,7 +34,9 @@ public abstract class pesawat implements Serializable{
         this.width = 40;
         this.height = 40;
     }
-
+    public void loadGambar()
+    {    
+    }
     public int getHp() {
         return hp;
     }
@@ -93,7 +100,18 @@ public abstract class pesawat implements Serializable{
     public void setDamagePesawat(int damagePesawat) {
         this.damagePesawat = damagePesawat;
     }
-    
+    public void loadgambarledakan()
+    {
+        try {
+            this.gbrLedak = new BufferedImage[4];
+            gbrLedak[0] = ImageIO.read(new File("images/expm1.png"));
+            gbrLedak[1] = ImageIO.read(new File("images/expm2.png"));
+            gbrLedak[2] = ImageIO.read(new File("images/expm3.png"));
+            gbrLedak[3] = ImageIO.read(new File("images/expm4.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(pesawatPlayer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public void draw(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
         if(tmrDim >= 0){
@@ -102,6 +120,9 @@ public abstract class pesawat implements Serializable{
         }
         g2.drawImage(gbrPesawat, posX, posY, width, height, null);    
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+        if (gbrLedak == null){
+            loadgambarledakan();
+        }
         if(ctrLedak >= 0 && ctrLedak <= 3){
             g2.drawImage(gbrLedak[ctrLedak], posX, posY, width, height, null);
             ctrLedak++;

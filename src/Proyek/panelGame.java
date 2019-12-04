@@ -4,6 +4,14 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -29,6 +37,7 @@ public class panelGame extends javax.swing.JPanel {
             runawal();
         }
     }
+    
     
     private void gameOver(){
         if(tmr.isRunning() == false){
@@ -90,7 +99,14 @@ public class panelGame extends javax.swing.JPanel {
                     if(gameSpace.player.hp<=0){
                         tmr.stop();
                         JOptionPane.showMessageDialog(null, "!!!!  Game Over  !!!!");
+                        if (scoreHiScore<gameSpace.getScore())
+                        {
+                            panelGame.scoreHiScore = gameSpace.getScore();
+                            panelGame.namaHiScore  = gameSpace.getNama();
+                            tulisscore();
+                        }
                         gameOver();
+                        
                     }
                     gameSpace.y1 += 5;
                     gameSpace.y2 += 5;
@@ -107,10 +123,25 @@ public class panelGame extends javax.swing.JPanel {
 
             tmr.start();
     }
+    public void tulisscore()
+    {
+        FileOutputStream fos = null;
+        try {
+            File fout = new File("hs.txt");
+            fos = new FileOutputStream(fout);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+            bw.write(panelGame.namaHiScore+"-"+panelGame.scoreHiScore);
+            bw.close();
+            fos.close();
+        } catch (Exception ex) {
+            Logger.getLogger(panelGame.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
     private void newGame(){
         gameSpace = new game(newPlayerName.namaPlayer, 1, LoginFrame.mode);
         gameSpace.setPlayer(new pesawatSingleShooter(100, 250, 450, 0, ""));
         gameSpace.randomMusuh();
+       
     }
     public void LoadGame(game gg){
         gameSpace = gg;
