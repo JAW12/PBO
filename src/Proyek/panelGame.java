@@ -257,6 +257,7 @@ public class panelGame extends javax.swing.JPanel {
         sfxSoundOn = sfxOn;
     }
     
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPause;
     // End of variables declaration//GEN-END:variables
