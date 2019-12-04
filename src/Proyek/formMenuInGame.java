@@ -54,13 +54,12 @@ public class formMenuInGame extends javax.swing.JFrame {
         btnResume = new javax.swing.JButton();
         btnBackToMain1 = new javax.swing.JButton();
         btnHelp = new javax.swing.JButton();
+        btnSetSfx = new javax.swing.JButton();
 
         jDialog1.setAlwaysOnTop(true);
         jDialog1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jDialog1.setMaximumSize(new java.awt.Dimension(505, 525));
         jDialog1.setMinimumSize(new java.awt.Dimension(505, 525));
         jDialog1.setModal(true);
-        jDialog1.setPreferredSize(new java.awt.Dimension(505, 525));
         jDialog1.setResizable(false);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Proyek/help.jpg"))); // NOI18N
@@ -83,7 +82,7 @@ public class formMenuInGame extends javax.swing.JFrame {
             }
         });
 
-        btnSetSound.setText("Sound : On");
+        btnSetSound.setText("Music : On");
         btnSetSound.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSetSoundMouseClicked(evt);
@@ -128,27 +127,37 @@ public class formMenuInGame extends javax.swing.JFrame {
             }
         });
 
+        btnSetSfx.setText("Sfx : On");
+        btnSetSfx.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSetSfxMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnExitGame, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnResume, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(34, 34, 34)
-                            .addComponent(btnSetSound, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(btnSaveGame, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBackToMain1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(49, 49, 49))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSaveGame, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBackToMain1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 1, Short.MAX_VALUE)
+                                .addComponent(btnResume)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSetSound)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSetSfx, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnExitGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,9 +166,10 @@ public class formMenuInGame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnResume, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSetSound, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(btnResume, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSetSound, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSetSfx, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(btnBackToMain1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSaveGame, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,7 +177,7 @@ public class formMenuInGame extends javax.swing.JFrame {
                 .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnExitGame, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -224,10 +234,14 @@ public class formMenuInGame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackToMain1MouseClicked
 
     private void btnHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHelpMouseClicked
-         jDialog1.setLocationRelativeTo(f_game);
+        jDialog1.setLocationRelativeTo(f_game);
         jDialog1.setLocation(f_game.getX() + f_game.getWidth()+ 10, f_game.getY());
         jDialog1.setVisible(true);
     }//GEN-LAST:event_btnHelpMouseClicked
+
+    private void btnSetSfxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSetSfxMouseClicked
+        setSfxGame();
+    }//GEN-LAST:event_btnSetSfxMouseClicked
 
     /**
      * @param args the command line arguments
@@ -266,12 +280,22 @@ public class formMenuInGame extends javax.swing.JFrame {
     
     public void setSoundGame(){
         if (LoginFrame.soundOn) {
-            btnSetSound.setText("Sound : off");
+            btnSetSound.setText("Music : off");
             LoginFrame.soundEffect(true);
         }
         else{
-            btnSetSound.setText("Sound : on");
+            btnSetSound.setText("Music : on");
             LoginFrame.soundEffect(false);
+        }
+    }
+    
+    public void setSfxGame(){
+        panelGame.setSfxSoundOn(!panelGame.sfxSoundOn);
+        if (panelGame.sfxSoundOn) {
+            btnSetSfx.setText("Sfx : off");
+        }
+        else{
+            btnSetSfx.setText("Sfx : on");
         }
     }
     
@@ -297,6 +321,7 @@ public class formMenuInGame extends javax.swing.JFrame {
     private javax.swing.JButton btnHelp;
     private javax.swing.JButton btnResume;
     private javax.swing.JButton btnSaveGame;
+    private javax.swing.JButton btnSetSfx;
     private javax.swing.JButton btnSetSound;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;

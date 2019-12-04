@@ -17,7 +17,7 @@ public class newPlayerName extends javax.swing.JFrame {
     public newPlayerName() {
         initComponents();
         LoginFrame.soundEffect(LoginFrame.soundOn);
-        panelNewPlayerName1.form = this;
+        panelNewPlayerName1.form = getMe();
         
     }
 
@@ -38,17 +38,11 @@ public class newPlayerName extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelNewPlayerName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(panelNewPlayerName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelNewPlayerName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(panelNewPlayerName1, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
         );
 
         pack();
@@ -87,6 +81,10 @@ public class newPlayerName extends javax.swing.JFrame {
                 new newPlayerName().setVisible(true);
             }
         });
+    }
+    
+    private newPlayerName getMe(){
+        return this;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

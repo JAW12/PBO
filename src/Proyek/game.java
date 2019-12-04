@@ -14,6 +14,11 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class game implements Serializable{
     protected String nama;
@@ -26,6 +31,7 @@ public class game implements Serializable{
     protected String gameMode;
     protected int tmrStage;
     protected int musuh;
+    protected int ctrSfxNextStage;
     
     public game(String nama,int stage, int difficulty) {
         this.tmrStage = -1;
@@ -58,7 +64,7 @@ public class game implements Serializable{
         }
     }
 
-     public void loadGambar()
+    public void loadGambar()
     {
         try {
             jpg = ImageIO.read(new File("images/bg.gif"));
@@ -71,6 +77,7 @@ public class game implements Serializable{
         }
         ((pesawatPlayer)player).loadGambar();
     }
+    
     public game getMe(){
         return this;
     }
@@ -129,8 +136,9 @@ public class game implements Serializable{
                 randomMusuh();
                 System.out.println("pergantian stage. Stage saat ini : " + this.getStage());
                 this.score += 100;
+                getSoundEffect("sfx/sfx next stage.wav");
             }
-             if(tmrStage < 0){
+            if(tmrStage < 0){
                 tmrStage = 0;
             }
         }
@@ -187,7 +195,6 @@ public class game implements Serializable{
         pesawat tabrak = null;
         for(pesawat p : this.listMusuh){
             if(this.getPlayer().bounds().intersects(p.bounds())){
-                
                 if(((pesawatPlayer)player).shieldActive<=0 && p.ctrLedak == -1){
                     tabrak = p;
                     this.player.hp-=50;
@@ -203,6 +210,7 @@ public class game implements Serializable{
             }
         }
         if(tabrak != null){
+            getSoundEffect("sfx/sfx_twoTone.wav");
             if(tabrak.ctrLedak < 0){
                 tabrak.ctrLedak = 0;
             }
@@ -273,6 +281,7 @@ public class game implements Serializable{
                         //JOptionPane.showMessageDialog(null, "Game Over");
                         //this.player = null;
                         //tmr.stop();
+                        getSoundEffect("sfx/sfx_twoTone.wav");
                         break;
                     }
                 }
@@ -344,9 +353,8 @@ public class game implements Serializable{
             g2.setColor(Color.CYAN);
             g2.fillRect(15, 450,(int)(((pesawatPlayer)this.player).shieldActive*1.5), 10);
         }
-        
     }
-    
+   
     public Boolean isMelewatiLayar(pesawat p){
         Boolean lewat = false;
         if (p.getPosX() + p.getWidth() >= 550) {
@@ -407,12 +415,72 @@ public class game implements Serializable{
                 System.out.println(((pesawatMusuh)this.listMusuh.get(i)).jenisPowerUp);
                 if(((pesawatMusuh)this.listMusuh.get(i)).jenisPowerUp != 2){
                     ((pesawatPlayer)player).powerUp((((pesawatMusuh)this.listMusuh.get(i)).jenisPowerUp));
+                    sfxShieldUp(this.listMusuh.get(i));
                 }
                 else{
                     player = ((pesawatPlayer)player).evolve();
                 }
+                getSoundEffect("sfx/sfx_explosion.wav");
                 this.listMusuh.remove(i);
                 this.score += 20;
+            }
+        }
+    }
+    
+    public void sfxShieldUp(pesawat p){
+        if (p instanceof pesawatMusuh) {
+            pesawatMusuh pmusuh = (pesawatMusuh)p;
+            if (pmusuh.jenisPowerUp == 1) {
+                getSoundEffect("sfx/sfx_shieldUp.wav");
+            }
+        }
+    }
+    
+    public void getSoundEffect(String filepath){
+        if (panelGame.sfxSoundOn) {
+            AudioInputStream ais = null;
+            try {
+                ais = AudioSystem.getAudioInputStream(new File(filepath));
+                Clip sfxClip = AudioSystem.getClip();
+                sfxClip.open(ais);
+                sfxClip.start();            
+            } catch (UnsupportedAudioFileException ex) {
+                Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (LineUnavailableException ex) {
+                Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    ais.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
+   public void getSoundEffect(String filepath, Boolean loopContinously){
+        AudioInputStream ais = null;
+        try {
+            ais = AudioSystem.getAudioInputStream(new File(filepath));
+            Clip sfxClip = AudioSystem.getClip();
+            if (loopContinously) {
+                sfxClip.loop(Clip.LOOP_CONTINUOUSLY);
+            }
+            sfxClip.open(ais);
+            sfxClip.start();            
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                ais.close();
+            } catch (IOException ex) {
+                Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

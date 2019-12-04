@@ -6,9 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +17,7 @@ public class panelGame extends javax.swing.JPanel {
 
     static Timer tmr;
     static Boolean exitGame;
+    static Boolean sfxSoundOn;
     static String namaHiScore;
     static int scoreHiScore;
     game gameSpace;
@@ -26,11 +25,13 @@ public class panelGame extends javax.swing.JPanel {
     float ctrWaktu;
     int ctrTembak;
     public formGameSpace formGame;
+    int ctrLoopSfxLose;
     
     public panelGame() {
         initComponents();
         this.setFocusable(true);
         exitGame = false;
+        sfxSoundOn = LoginFrame.soundOn;
         if (LoginFrame.LOADGAME==false)
         {
             newGame();
@@ -38,10 +39,11 @@ public class panelGame extends javax.swing.JPanel {
         }
     }
     
-    
     private void gameOver(){
         if(tmr.isRunning() == false){
             formGame.setVisible(false);
+            LoginFrame.soundOn = false;
+            LoginFrame.soundEffect(LoginFrame.soundOn);
             LoginFrame formlogin = new LoginFrame();
             formlogin.setLocationRelativeTo(null);
             formlogin.setVisible(true);
@@ -53,75 +55,77 @@ public class panelGame extends javax.swing.JPanel {
         gameSpace.loadGambar();
         for (pesawat p : gameSpace.listMusuh) {
                 ((pesawatMusuh)p).tmrTembak = (int)(Math.random()*50) + 10;
-            }
-            tmr = new Timer(50, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    for (pesawat p : gameSpace.listMusuh) {
-                        if(((pesawatMusuh)p).tmrTembak == 0){
-                            ((pesawatMusuh)p).tmrTembak = (int)(Math.random()*50) + 10;
-                            p.shoot();
-                        }
-                        else{
-                            ((pesawatMusuh)p).tmrTembak--;
-                        }
-
-                    }
-                    for (pesawat p : gameSpace.listMusuh) {
-                        p.moveMusuh();
-                    }
-                    for (peluru p : ((pesawatPlayer)gameSpace.player).listPeluru){
-                        p.move();
-                    }
-                    for (pesawat p : gameSpace.listMusuh) {
-                        for (peluru pl : ((pesawatMusuh)p).listPeluru){
-                            pl.move();
-                        }
-                    }
-
-                    ctrWaktu+= 0.05;
-                    if (ctrWaktu >= 1) { //setiap 1 detik
-                        gameSpace.nextStage();
-                    }
-                    gameSpace.tabrak();
-                    gameSpace.nembak();
-                    gameSpace.checkPesawatMati();
-                    gameSpace.ketembak();
-                    gameSpace.ledak();
-                    gameSpace.checkPesawatMelewatiLayar();
-                    gameSpace.checkPeluruMelewatiLayar();
-                    if(((pesawatPlayer)gameSpace.player).ctrPowerUp > 0){
-                        ((pesawatPlayer)gameSpace.player).ctrPowerUp--;
+        }
+        tmr = new Timer(50, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                for (pesawat p : gameSpace.listMusuh) {
+                    if(((pesawatMusuh)p).tmrTembak == 0){
+                        ((pesawatMusuh)p).tmrTembak = (int)(Math.random()*50) + 10;
+                        p.shoot();
+                        pesawatMusuh musuh = (pesawatMusuh)p;
+                        sfxTembak(musuh);
                     }
                     else{
-                        ((pesawatPlayer)gameSpace.player).powerUP = "";
+                        ((pesawatMusuh)p).tmrTembak--;
                     }
-                    if(gameSpace.player.hp<=0){
-                        tmr.stop();
-                        JOptionPane.showMessageDialog(null, "!!!!  Game Over  !!!!");
-                        if (scoreHiScore<gameSpace.getScore())
-                        {
-                            panelGame.scoreHiScore = gameSpace.getScore();
-                            panelGame.namaHiScore  = gameSpace.getNama();
-                            tulisscore();
-                        }
-                        gameOver();
-                        
-                    }
-                    gameSpace.y1 += 5;
-                    gameSpace.y2 += 5;
-                    if(gameSpace.y1 >= 550){
-                        gameSpace.y1 = -550;
-                    }
-                    if(gameSpace.y2 >= 550){
-                        gameSpace.y2 = -550;
-                    }
-                    
-                    repaint();
-                }
-            });
 
-            tmr.start();
+                }
+                for (pesawat p : gameSpace.listMusuh) {
+                    p.moveMusuh();
+                }
+                for (peluru p : ((pesawatPlayer)gameSpace.player).listPeluru){
+                    p.move();
+                }
+                for (pesawat p : gameSpace.listMusuh) {
+                    for (peluru pl : ((pesawatMusuh)p).listPeluru){
+                        pl.move();
+                    }
+                }
+
+                ctrWaktu+= 0.05;
+                if (ctrWaktu >= 1) { //setiap 1 detik
+                    gameSpace.nextStage();
+                }
+                gameSpace.tabrak();
+                gameSpace.nembak();
+                gameSpace.checkPesawatMati();
+                gameSpace.ketembak();
+                gameSpace.ledak();
+                gameSpace.checkPesawatMelewatiLayar();
+                gameSpace.checkPeluruMelewatiLayar();
+                if(((pesawatPlayer)gameSpace.player).ctrPowerUp > 0){
+                    ((pesawatPlayer)gameSpace.player).ctrPowerUp--;
+                }
+                else{
+                    ((pesawatPlayer)gameSpace.player).powerUP = "";
+                }
+                if(gameSpace.player.hp<=0){
+                    tmr.stop();
+                    gameSpace.getSoundEffect("sfx/sfx_game over.wav", true);
+                    JOptionPane.showMessageDialog(null, "!!!!  Game Over  !!!!");
+                    if (scoreHiScore<gameSpace.getScore())
+                    {
+                        panelGame.scoreHiScore = gameSpace.getScore();
+                        panelGame.namaHiScore  = gameSpace.getNama();
+                        tulisscore();
+                    }
+                    gameOver();
+                }
+                gameSpace.y1 += 5;
+                gameSpace.y2 += 5;
+                if(gameSpace.y1 >= 550){
+                    gameSpace.y1 = -550;
+                }
+                if(gameSpace.y2 >= 550){
+                    gameSpace.y2 = -550;
+                }
+
+                repaint();
+            }
+        });
+
+        tmr.start();
     }
     public void tulisscore()
     {
@@ -184,11 +188,6 @@ public class panelGame extends javax.swing.JPanel {
                 btnPauseMouseClicked(evt);
             }
         });
-        btnPause.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPauseActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -217,8 +216,10 @@ public class panelGame extends javax.swing.JPanel {
         }
         else if(evt.getKeyCode() == KeyEvent.VK_SPACE){
             ((pesawatPlayer)gameSpace.getPlayer()).shoot();
+            sfxTembak(gameSpace.getPlayer());
         }
         else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            gameSpace.getSoundEffect("sfx/sfx_zap.wav");
             setPauseGame();
         }
         
@@ -227,12 +228,9 @@ public class panelGame extends javax.swing.JPanel {
 
     private void btnPauseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPauseMouseClicked
         // TODO add your handling code here:
+        gameSpace.getSoundEffect("sfx/sfx_zap.wav");
         setPauseGame();    
     }//GEN-LAST:event_btnPauseMouseClicked
-
-    private void btnPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPauseActionPerformed
-
-    }//GEN-LAST:event_btnPauseActionPerformed
 
     private void setPauseGame(){
         if (tmr.isRunning()) {
@@ -244,7 +242,20 @@ public class panelGame extends javax.swing.JPanel {
         }
     }
     
+    private void sfxTembak(pesawat p){
+        if (sfxSoundOn) {
+            if (p instanceof pesawatPlayer) {
+                gameSpace.getSoundEffect("sfx/sfx_laser1.wav");
+            }
+            else if(p instanceof pesawatMusuh) {
+                gameSpace.getSoundEffect("sfx/sfx_laser2.wav");
+            }
+        }
+    }
     
+    static void setSfxSoundOn(Boolean sfxOn){
+        sfxSoundOn = sfxOn;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPause;

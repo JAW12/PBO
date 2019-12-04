@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public abstract class pesawatPlayer extends pesawat{
     /*
@@ -22,6 +27,8 @@ public abstract class pesawatPlayer extends pesawat{
     transient BufferedImage gbrShield;
     protected int ctrPowerUp;
     protected String powerUP;
+    
+    protected Boolean shieldOn;
 
     public pesawatPlayer(int hp, int x, int y) {
         super(hp, x, y);
@@ -30,6 +37,7 @@ public abstract class pesawatPlayer extends pesawat{
         this.mX = 5;
         //awal game dimulai pasti dia ga punya shield
         this.shieldActive = -1;
+        this.shieldOn = false;
         this.listPeluru = new ArrayList<>();
         powerUP = "";
         try {
@@ -42,11 +50,14 @@ public abstract class pesawatPlayer extends pesawat{
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public abstract pesawatPlayer evolve();
+    
     public void loadGambar()
     {
         try {
-                this.gbrShield = ImageIO.read(new File("images/shield.png"));
-                loadGambarPeluru();
+            this.gbrShield = ImageIO.read(new File("images/shield.png"));
+            loadGambarPeluru();
         } catch (IOException ex) {
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,6 +75,14 @@ public abstract class pesawatPlayer extends pesawat{
         return shieldActive;
     }
 
+    public Boolean getShieldOn() {
+        return shieldOn;
+    }
+
+    public void setShieldOn(Boolean shieldOn) {
+        this.shieldOn = shieldOn;
+    }
+    
     public void setShieldActive(int shieldActive) {
         this.shieldActive = shieldActive;
     }
@@ -95,6 +114,7 @@ public abstract class pesawatPlayer extends pesawat{
             ctrPowerUp = 25;
         }
         else if(jenisPowerUp == 1){
+            shieldOn = true;
             shieldActive = 300;
             powerUP = "You got 15s Shield.";
             ctrPowerUp = 25;
@@ -118,6 +138,7 @@ public abstract class pesawatPlayer extends pesawat{
             Logger.getLogger(pesawatPlayer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     @Override
     public void draw(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
@@ -125,6 +146,13 @@ public abstract class pesawatPlayer extends pesawat{
             g2.drawImage(gbrShield, posX-12, posY-12, width+25, height+25, null);
             shieldActive--;
         }
+        else{
+            if (shieldOn) {
+                getSoundEffect("sfx/sfx_shieldDown.wav");
+                shieldOn = false;
+            }
+        }
+        
         if (gbrLedak == null){
                 loadgambarledakan();
             }
@@ -143,6 +171,28 @@ public abstract class pesawatPlayer extends pesawat{
         }
     }
     
-    public abstract pesawatPlayer evolve();
+    public void getSoundEffect(String filepath){
+        AudioInputStream ais = null;
+        try {
+            ais = AudioSystem.getAudioInputStream(new File(filepath));
+            Clip sfxClip = AudioSystem.getClip();
+            sfxClip.open(ais);
+            sfxClip.start();            
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                ais.close();
+            } catch (IOException ex) {
+                Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    
     
 }

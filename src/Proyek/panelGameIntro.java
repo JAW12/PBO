@@ -45,7 +45,7 @@ public class panelGameIntro extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
                     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                    if (ctrWaktu >= 4) {
+                    if (ctrWaktu >= 3) {
                         canSkip = true;
                         lblSkip.setText("PRESS SPACE TO SKIP THE VIDEO");
                     }
@@ -129,7 +129,9 @@ public class panelGameIntro extends javax.swing.JPanel {
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            checkIntroDone(true);
+            if (canSkip) {
+                checkIntroDone(true);
+            }
         }
     }//GEN-LAST:event_formKeyPressed
 
