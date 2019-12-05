@@ -108,6 +108,9 @@ public abstract class pesawatPlayer extends pesawat{
     }
     
     public void powerUp(int jenisPowerUp){
+        if (jenisPowerUp >= 0 && jenisPowerUp <= 3 && jenisPowerUp != 2) {
+            getSoundEffect("sfx/sfx_power ups.wav");
+        }
         if(jenisPowerUp == 0){
             hp += 20;
             powerUP = "You got HP + 20.";

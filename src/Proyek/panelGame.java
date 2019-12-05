@@ -37,6 +37,7 @@ public class panelGame extends javax.swing.JPanel {
             newGame();
             runawal();
         }
+        this.addKeyListener(Keyboard.listener);
     }
     
     private void gameOver(){
@@ -222,6 +223,21 @@ public class panelGame extends javax.swing.JPanel {
             gameSpace.getSoundEffect("sfx/sfx_zap.wav");
             setPauseGame();
         }
+        
+//        if (Keyboard.isPressed(KeyEvent.VK_A)) {
+//            gameSpace.getPlayer().movePlayer("A");
+//        }
+//        if (Keyboard.isPressed(KeyEvent.VK_D)) {
+//            gameSpace.getPlayer().movePlayer("D");
+//        }
+//        if (Keyboard.isPressed(KeyEvent.VK_SPACE)) {
+//            ((pesawatPlayer)gameSpace.getPlayer()).shoot();
+//            sfxTembak(gameSpace.getPlayer());
+//        }
+//        if (Keyboard.isPressed(KeyEvent.VK_ESCAPE)) {
+//            gameSpace.getSoundEffect("sfx/sfx_zap.wav");
+//            setPauseGame();
+//        }
         
         repaint();
     }//GEN-LAST:event_formKeyPressed

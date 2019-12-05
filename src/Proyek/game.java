@@ -412,6 +412,7 @@ public class game implements Serializable{
     public void checkPesawatMati(){
         for (int i = 0; i < this.listMusuh.size(); i++) {
             if (isMati(this.listMusuh.get(i)) && this.listMusuh.get(i).ctrLedak >= 3) {
+                getSoundEffect("sfx/sfx_explosion.wav");
                 System.out.println(((pesawatMusuh)this.listMusuh.get(i)).jenisPowerUp);
                 if(((pesawatMusuh)this.listMusuh.get(i)).jenisPowerUp != 2){
                     ((pesawatPlayer)player).powerUp((((pesawatMusuh)this.listMusuh.get(i)).jenisPowerUp));
@@ -420,7 +421,6 @@ public class game implements Serializable{
                 else{
                     player = ((pesawatPlayer)player).evolve();
                 }
-                getSoundEffect("sfx/sfx_explosion.wav");
                 this.listMusuh.remove(i);
                 this.score += 20;
             }
