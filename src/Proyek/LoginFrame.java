@@ -1,6 +1,5 @@
 package Proyek;
 
-import static Proyek.newPlayerName.namaPlayer;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;

@@ -123,6 +123,7 @@ public class panelGame extends javax.swing.JPanel {
                 }
 
                 repaint();
+                checkKeyboardEvt();
             }
         });
 
@@ -209,37 +210,7 @@ public class panelGame extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_A) {
-            gameSpace.getPlayer().movePlayer("A");
-        }
-        else if (evt.getKeyCode() == KeyEvent.VK_D) {
-            gameSpace.getPlayer().movePlayer("D");
-        }
-        else if(evt.getKeyCode() == KeyEvent.VK_SPACE){
-            ((pesawatPlayer)gameSpace.getPlayer()).shoot();
-            sfxTembak(gameSpace.getPlayer());
-        }
-        else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            gameSpace.getSoundEffect("sfx/sfx_zap.wav");
-            setPauseGame();
-        }
-        
-//        if (Keyboard.isPressed(KeyEvent.VK_A)) {
-//            gameSpace.getPlayer().movePlayer("A");
-//        }
-//        if (Keyboard.isPressed(KeyEvent.VK_D)) {
-//            gameSpace.getPlayer().movePlayer("D");
-//        }
-//        if (Keyboard.isPressed(KeyEvent.VK_SPACE)) {
-//            ((pesawatPlayer)gameSpace.getPlayer()).shoot();
-//            sfxTembak(gameSpace.getPlayer());
-//        }
-//        if (Keyboard.isPressed(KeyEvent.VK_ESCAPE)) {
-//            gameSpace.getSoundEffect("sfx/sfx_zap.wav");
-//            setPauseGame();
-//        }
-        
-        repaint();
+        /* pake void checkKeyboardEvent*/
     }//GEN-LAST:event_formKeyPressed
 
     private void btnPauseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPauseMouseClicked
@@ -267,6 +238,24 @@ public class panelGame extends javax.swing.JPanel {
                 gameSpace.getSoundEffect("sfx/sfx_laser2.wav");
             }
         }
+    }
+    
+    private void checkKeyboardEvt(){
+        if (Keyboard.isPressed(KeyEvent.VK_A)) {
+            gameSpace.getPlayer().movePlayer("A");
+        }
+        if (Keyboard.isPressed(KeyEvent.VK_D)) {
+            gameSpace.getPlayer().movePlayer("D");
+        }
+        if (Keyboard.isPressed(KeyEvent.VK_SPACE)) {
+            ((pesawatPlayer)gameSpace.getPlayer()).shoot();
+            sfxTembak(gameSpace.getPlayer());
+        }
+        if (Keyboard.isPressed(KeyEvent.VK_ESCAPE)) {
+            gameSpace.getSoundEffect("sfx/sfx_zap.wav");
+            setPauseGame();
+        }
+        repaint();
     }
     
     static void setSfxSoundOn(Boolean sfxOn){

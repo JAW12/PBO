@@ -41,6 +41,7 @@ public class panelGameIntro extends javax.swing.JPanel {
             Desktop d = Desktop.getDesktop();
             d.open(f);
             
+            
             t = new Timer(1000, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
