@@ -16,9 +16,6 @@ import javax.swing.JOptionPane;
 
 public class LoginFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form LoginFrame
-     */
     static boolean LOADGAME=false;
     static int mode; //1 = easy ; 2 = medium ; 3 = hard
     static AudioInputStream audioInputStream;
@@ -27,7 +24,7 @@ public class LoginFrame extends javax.swing.JFrame {
     
     public LoginFrame() {
         this.setResizable(false);
-        this.soundOn = false;
+        this.soundOn = true;
         try {
             initComponents();
             audioInputStream = AudioSystem.getAudioInputStream(new File("sound.wav"));
