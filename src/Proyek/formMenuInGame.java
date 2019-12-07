@@ -15,6 +15,7 @@ public class formMenuInGame extends javax.swing.JFrame {
      * Creates new form formMenuInGame
      */
     game terimaGame;
+    LoginFrame formLogin;
     
     static formGameSpace f_game;
     public formMenuInGame() {
@@ -24,15 +25,11 @@ public class formMenuInGame extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
         @Override
         public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-//            if (JOptionPane.showConfirmDialog(null, 
-//                "Are you sure you want to close this window?", "Close Window?", 
-//                JOptionPane.YES_NO_OPTION,
-//                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
-//                
-//            }
             setResumePause();
         }
         });
+        
+        this.formLogin = LoginFrame.formLogin;
         setSoundGame();
     }
 
@@ -215,13 +212,8 @@ public class formMenuInGame extends javax.swing.JFrame {
 
     private void btnExitGameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitGameMouseClicked
         //struktur message box sementara kayak gini, boleh diubah
-        int n = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit game?", "Exit Game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int n = JOptionPane.showConfirmDialog(null, "You'll lose unsaved changes. Are you sure?", "Exit Game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (n == JOptionPane.YES_OPTION) {
-            int n2 = JOptionPane.showConfirmDialog(null, "Do you want to save current game?", "Exit Game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (n2 == JOptionPane.YES_OPTION) { //save game
-                
-            }
-            
             System.exit(0); //keluar dari program
         }
     }//GEN-LAST:event_btnExitGameMouseClicked
@@ -318,9 +310,10 @@ public class formMenuInGame extends javax.swing.JFrame {
     public void showMainMenu(){
         this.setVisible(false);
         f_game.setVisible(false);
-        LoginFrame login = new LoginFrame();
-        login.setLocationRelativeTo(null);
-        login.setVisible(true);
+        
+        //back to form login / main menu
+        formLogin.setLocationRelativeTo(this);
+        formLogin.setVisible(true);
     }
     
 

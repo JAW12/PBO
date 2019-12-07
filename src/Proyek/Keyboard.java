@@ -6,19 +6,19 @@ import java.awt.event.KeyListener;
 
 public class Keyboard {
 
-    private static boolean[] pressed = new boolean[128];
+    private boolean[] pressed = new boolean[128];
 
-    public static boolean isPressed(int key) {
+    public boolean isPressed(int key) {
         return pressed[key];
     }
     
-    public static void reset(){
+    public void reset(){
         for(boolean b : pressed){
             b = false;
         }
     }
  
-   public static KeyListener listener = new KeyAdapter() {
+   public KeyListener listener = new KeyAdapter() {
         @Override
         public void keyPressed(KeyEvent e) {
             int code = e.getKeyCode();

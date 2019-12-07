@@ -22,9 +22,10 @@ public class panelGame extends javax.swing.JPanel {
     static int scoreHiScore;
     game gameSpace;
     public String namaPlayer;
+    public formGameSpace formGame;
+    public Keyboard keyboard;
     float ctrWaktu;
     int ctrTembak;
-    public formGameSpace formGame;
     int ctrLoopSfxLose;
     
     public panelGame() {
@@ -37,12 +38,19 @@ public class panelGame extends javax.swing.JPanel {
             newGame();
             runawal();
         }
-        this.addKeyListener(Keyboard.listener);
+        setUpMultipleKeyPressed();
+    }
+    
+    private void setUpMultipleKeyPressed(){
+        if (keyboard != null) {
+            keyboard.reset();
+        }
+        keyboard = new Keyboard();
+        this.addKeyListener(keyboard.listener);
     }
     
     private void gameOver(){
         if(tmr.isRunning() == false){
-            Keyboard.reset();
             formGame.setVisible(false);
             LoginFrame.soundOn = false;
             LoginFrame.soundEffect(LoginFrame.soundOn);
@@ -247,13 +255,13 @@ public class panelGame extends javax.swing.JPanel {
     }
     
     private void checkKeyboardEvt(){
-        if (Keyboard.isPressed(KeyEvent.VK_A)) {
+        if (this.keyboard.isPressed(KeyEvent.VK_A)) {
             gameSpace.getPlayer().movePlayer("A");
         }
-        if (Keyboard.isPressed(KeyEvent.VK_D)) {
+        if (this.keyboard.isPressed(KeyEvent.VK_D)) {
             gameSpace.getPlayer().movePlayer("D");
         }
-        if (Keyboard.isPressed(KeyEvent.VK_SPACE)) {
+        if (this.keyboard.isPressed(KeyEvent.VK_SPACE)) {
             if(gameSpace.getPlayer().ctrTembak < 0){
                 ((pesawatPlayer)gameSpace.getPlayer()).shoot();
                 sfxTembak(gameSpace.getPlayer());

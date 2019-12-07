@@ -21,6 +21,7 @@ public class LoginFrame extends javax.swing.JFrame {
     static AudioInputStream audioInputStream;
     static Clip clip;
     static boolean soundOn;
+    static LoginFrame formLogin;
     
     public LoginFrame() {
         this.setResizable(false);
@@ -33,7 +34,12 @@ public class LoginFrame extends javax.swing.JFrame {
         } catch (LineUnavailableException | UnsupportedAudioFileException | IOException ex) {
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+        formLogin = getMe();
         setButtonSound(btnSound);
+    }
+    
+    private LoginFrame getMe(){
+        return this;
     }
 
     /**
@@ -97,11 +103,6 @@ public class LoginFrame extends javax.swing.JFrame {
         btnLoad.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLoadMouseClicked(evt);
-            }
-        });
-        btnLoad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoadActionPerformed(evt);
             }
         });
 
@@ -213,6 +214,8 @@ public class LoginFrame extends javax.swing.JFrame {
             f_game.setVisible(true);
             formMenuInGame.f_game = f_game;
             baca.close(); fisp.close();
+            
+            this.setVisible(false);
             JOptionPane.showMessageDialog(null, "latest saved game has been loaded!");
         }
         catch(Exception ex){
@@ -232,10 +235,6 @@ public class LoginFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "player's name must at least be 3 characters long");
         }*/
     }//GEN-LAST:event_btnLoadMouseClicked
-
-    private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
-        
-    }//GEN-LAST:event_btnLoadActionPerformed
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
