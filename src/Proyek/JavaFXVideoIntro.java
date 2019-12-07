@@ -181,7 +181,7 @@ public class JavaFXVideoIntro extends Application {
             );
         }
     }
-    
+    int ctr = 0;
     private void showMainMenu(){
         //menutup video
         Platform.exit(); 
@@ -196,8 +196,9 @@ public class JavaFXVideoIntro extends Application {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.SPACE) {
+                if (event.getCode() == KeyCode.SPACE && ctr < 1) {
                     skipVideo();
+                    ctr++;
                 }
                 else if (event.getCode() == KeyCode.F) {
                     stage.setFullScreen(true);

@@ -42,6 +42,7 @@ public class panelGame extends javax.swing.JPanel {
     
     private void gameOver(){
         if(tmr.isRunning() == false){
+            Keyboard.reset();
             formGame.setVisible(false);
             LoginFrame.soundOn = false;
             LoginFrame.soundEffect(LoginFrame.soundOn);
@@ -70,7 +71,9 @@ public class panelGame extends javax.swing.JPanel {
                     else{
                         ((pesawatMusuh)p).tmrTembak--;
                     }
-
+                }
+                if(gameSpace.getPlayer().ctrTembak >= 0){
+                    gameSpace.getPlayer().ctrTembak--;
                 }
                 for (pesawat p : gameSpace.listMusuh) {
                     p.moveMusuh();
@@ -210,7 +213,10 @@ public class panelGame extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        /* pake void checkKeyboardEvent*/
+        if(evt.getKeyCode() == KeyEvent.VK_ESCAPE){
+            gameSpace.getSoundEffect("sfx/sfx_zap.wav");
+            setPauseGame();
+        }
     }//GEN-LAST:event_formKeyPressed
 
     private void btnPauseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPauseMouseClicked
@@ -248,13 +254,16 @@ public class panelGame extends javax.swing.JPanel {
             gameSpace.getPlayer().movePlayer("D");
         }
         if (Keyboard.isPressed(KeyEvent.VK_SPACE)) {
-            ((pesawatPlayer)gameSpace.getPlayer()).shoot();
-            sfxTembak(gameSpace.getPlayer());
+            if(gameSpace.getPlayer().ctrTembak < 0){
+                ((pesawatPlayer)gameSpace.getPlayer()).shoot();
+                sfxTembak(gameSpace.getPlayer());
+                gameSpace.getPlayer().ctrTembak = 3;
+            }
         }
-        if (Keyboard.isPressed(KeyEvent.VK_ESCAPE)) {
-            gameSpace.getSoundEffect("sfx/sfx_zap.wav");
-            setPauseGame();
-        }
+//        if (Keyboard.isPressed(KeyEvent.VK_ESCAPE)) {
+//            gameSpace.getSoundEffect("sfx/sfx_zap.wav");
+//            setPauseGame();
+//        }    
         repaint();
     }
     

@@ -113,8 +113,8 @@ public class game implements Serializable{
         this.listMusuh.add(m);
     }
 
-    public pesawat getPlayer() {
-        return player;
+    public pesawatPlayer getPlayer() {
+        return (pesawatPlayer)player;
     }
 
     public void setPlayer(pesawat player) {

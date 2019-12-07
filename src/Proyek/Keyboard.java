@@ -11,6 +11,12 @@ public class Keyboard {
     public static boolean isPressed(int key) {
         return pressed[key];
     }
+    
+    public static void reset(){
+        for(boolean b : pressed){
+            b = false;
+        }
+    }
  
    public static KeyListener listener = new KeyAdapter() {
         @Override
@@ -19,7 +25,7 @@ public class Keyboard {
             if (code < pressed.length) {
                 pressed[code] = true;
             }
-        }
+        }   
 
         @Override
         public void keyReleased(KeyEvent e) {
@@ -28,5 +34,7 @@ public class Keyboard {
                 pressed[code] = false;
             }
         }
+        
+        
     };
 }

@@ -21,6 +21,7 @@ public abstract class pesawatPlayer extends pesawat{
     2 = double shooter
     3 = triple shooter
     */
+    protected int ctrTembak;
     protected int shieldActive;
     protected ArrayList<peluru> listPeluru;
     protected int damageNabrak;
@@ -32,6 +33,7 @@ public abstract class pesawatPlayer extends pesawat{
 
     public pesawatPlayer(int hp, int x, int y) {
         super(hp, x, y);
+        this.ctrTembak = -1;
         this.damagePesawat = 20;
         this.damageNabrak = 50;
         this.mX = 5;

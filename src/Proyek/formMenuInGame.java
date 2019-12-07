@@ -112,6 +112,11 @@ public class formMenuInGame extends javax.swing.JFrame {
                 btnResumeMouseClicked(evt);
             }
         });
+        btnResume.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResumeActionPerformed(evt);
+            }
+        });
 
         btnBackToMain1.setText("Back to Main Menu");
         btnBackToMain1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -242,6 +247,10 @@ public class formMenuInGame extends javax.swing.JFrame {
     private void btnSetSfxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSetSfxMouseClicked
         setSfxGame();
     }//GEN-LAST:event_btnSetSfxMouseClicked
+
+    private void btnResumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResumeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnResumeActionPerformed
 
     /**
      * @param args the command line arguments
