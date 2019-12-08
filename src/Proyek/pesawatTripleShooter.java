@@ -19,6 +19,7 @@ public class pesawatTripleShooter extends pesawatPlayer{
         this.powerUP = powerUP;
         try {
             this.gbrPesawat = ImageIO.read(new File("images/p3.png"));
+            this.gbrBlast = ImageIO.read(new File("images/blast.png"));
         } catch (IOException ex) {
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -27,6 +28,8 @@ public class pesawatTripleShooter extends pesawatPlayer{
     {
         try {
             this.gbrPesawat = ImageIO.read(new File("images/p3.png"));
+            this.gbrShield = ImageIO.read(new File("images/shield.png"));
+            this.gbrBlast = ImageIO.read(new File("images/blast.png"));
             super.loadGambar();
         } catch (IOException ex) {
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);

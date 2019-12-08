@@ -358,7 +358,7 @@ public class game implements Serializable{
         if(tmrStage >= 0){
             if(tmrStage >= 10){
                 g2.setFont(new Font("Arial", 1, 32));
-                g2.drawString("Stage " + stage, 200, 250);
+                g2.drawString("Stage " + stage, 200 - (String.valueOf(stage).length()-1)*10, 250);
                 g2.setFont(new Font("Arial", 1, 16));
                 g2.drawString(this.listMusuh.size() + " Enemies", 215, 275);
             }

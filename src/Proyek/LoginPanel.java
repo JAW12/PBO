@@ -2,6 +2,7 @@ package Proyek;
 
 import static Proyek.panelGame.namaHiScore;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -143,9 +144,10 @@ public class LoginPanel extends javax.swing.JPanel {
         }
         g2 = (Graphics2D)g;
         g2.drawImage(jpg,10,-20,400,300,null);
+        g2.setFont(new Font("Arial", 1, 18));
         g2.setColor(Color.white);
-        g2.drawString("High Score = " +panelGame.scoreHiScore,100,20);
-        g2.drawString("Nama       = " +panelGame.namaHiScore ,250,20);
+        g2.drawString("Highscore : ", 160, 225);
+        g2.drawString(panelGame.namaHiScore + " - " +panelGame.scoreHiScore,170-panelGame.namaHiScore.length()-String.valueOf(panelGame.scoreHiScore).length(),250);
     }
 
     /**

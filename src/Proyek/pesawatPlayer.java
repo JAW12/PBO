@@ -52,8 +52,8 @@ public abstract class pesawatPlayer extends pesawat{
             gbrLedak[0] = ImageIO.read(new File("images/expm1.png"));
             gbrLedak[1] = ImageIO.read(new File("images/expm2.png"));
             gbrLedak[2] = ImageIO.read(new File("images/expm3.png"));
-            gbrLedak[3] = ImageIO.read(new File("images/expm4.png"));
-            gbrBlast = ImageIO.read(new File("images/blast.png"));
+            gbrLedak[3] = ImageIO.read(new File("images/expm4.p ng"));
+            this.gbrBlast = ImageIO.read(new File("images/blast.png"));
         } catch (IOException ex) {
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -65,6 +65,7 @@ public abstract class pesawatPlayer extends pesawat{
     {
         try {
             this.gbrShield = ImageIO.read(new File("images/shield.png"));
+            this.gbrBlast = ImageIO.read(new File("images/blast.png"));
             loadGambarPeluru();
         } catch (IOException ex) {
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);

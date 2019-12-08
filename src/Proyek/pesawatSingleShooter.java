@@ -23,6 +23,8 @@ public class pesawatSingleShooter extends pesawatPlayer{
     {
         try {
             this.gbrPesawat = ImageIO.read(new File("images/p1.png"));
+            this.gbrShield = ImageIO.read(new File("images/shield.png"));
+            this.gbrBlast = ImageIO.read(new File("images/blast.png"));
             super.loadGambar();
         } catch (IOException ex) {
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
