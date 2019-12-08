@@ -27,10 +27,8 @@ public class panelGame extends javax.swing.JPanel {
     float ctrWaktu;
     int ctrTembak;
     int ctrLoopSfxLose;
-    boolean blastActive;
     
     public panelGame() {
-        blastActive = false;
         initComponents();
         this.setFocusable(true);
         exitGame = false;
@@ -96,10 +94,10 @@ public class panelGame extends javax.swing.JPanel {
                         pl.move();
                     }
                 }
-                if(blastActive){
-                    gameSpace.getPlayer().ctrBlast-=5;
+                if(gameSpace.blastActive){
+                    gameSpace.getPlayer().ctrBlast-=3;
                     if(gameSpace.getPlayer().ctrBlast <= 0){
-                        blastActive = false;
+                        gameSpace.blastActive = false;
                     }
                 }
                 ctrWaktu+= 0.05;
@@ -108,6 +106,7 @@ public class panelGame extends javax.swing.JPanel {
                 }
                 gameSpace.tabrak();
                 gameSpace.nembak();
+                gameSpace.blast();
                 gameSpace.checkPesawatMati();
                 gameSpace.ketembak();
                 gameSpace.ledak();
@@ -233,7 +232,7 @@ public class panelGame extends javax.swing.JPanel {
             setPauseGame();
         }
         if(evt.getKeyCode() == KeyEvent.VK_ENTER && gameSpace.getPlayer().ctrBlast == 100){
-            blastActive = true;
+            gameSpace.blastActive = true;
             gameSpace.getPlayer().yBlast = 550;
         }
     }//GEN-LAST:event_formKeyPressed

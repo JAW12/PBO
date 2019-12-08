@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -32,8 +33,10 @@ public class game implements Serializable{
     protected int tmrStage;
     protected int musuh;
     protected int ctrSfxNextStage;
+    protected boolean blastActive;
     
     public game(String nama,int stage, int difficulty) {
+        this.blastActive = false;
         this.tmrStage = -1;
         this.musuh = 0;
         this.nama = nama;
@@ -243,6 +246,16 @@ public class game implements Serializable{
         hapus();
     }
     
+    public void blast(){
+        if(getPlayer().yBlast >= 0){
+            Rectangle b = new Rectangle(-15, getPlayer().yBlast, 545, 10);
+            for(pesawat p : this.listMusuh){
+                if(b.intersects(p.bounds())){
+                    p.hp = -1;
+                }
+            }
+        }
+    }
     
     public void hapus(){
         for (int i = 0; i < idxHapus.size(); i++) {
@@ -428,10 +441,13 @@ public class game implements Serializable{
                 }
                 this.listMusuh.remove(i);
                 this.score += 20;
-                getPlayer().ctrBlast += 10;
-                if(getPlayer().ctrBlast >= 100){
-                    getPlayer().ctrBlast = 100;
+                if(getPlayer().yBlast <= 0 || getPlayer().yBlast >= 550){
+                    getPlayer().ctrBlast += 10;
+                    if(getPlayer().ctrBlast >= 100){
+                        getPlayer().ctrBlast = 100;
+                    }  
                 }
+                
             }
         }
     }

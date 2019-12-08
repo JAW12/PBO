@@ -55,21 +55,28 @@ public class formMenuInGame extends javax.swing.JFrame {
 
         jDialog1.setAlwaysOnTop(true);
         jDialog1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jDialog1.setMinimumSize(new java.awt.Dimension(505, 525));
+        jDialog1.setMinimumSize(new java.awt.Dimension(505, 600));
         jDialog1.setModal(true);
+        jDialog1.setPreferredSize(new java.awt.Dimension(505, 600));
         jDialog1.setResizable(false);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Proyek/help.jpg"))); // NOI18N
+        jLabel2.setMaximumSize(new java.awt.Dimension(505, 600));
+        jLabel2.setMinimumSize(new java.awt.Dimension(505, 600));
+        jLabel2.setName(""); // NOI18N
+        jLabel2.setPreferredSize(new java.awt.Dimension(505, 600));
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
         jDialog1Layout.setHorizontalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
         );
         jDialog1Layout.setVerticalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
