@@ -27,8 +27,10 @@ public class panelGame extends javax.swing.JPanel {
     float ctrWaktu;
     int ctrTembak;
     int ctrLoopSfxLose;
+    boolean blastActive;
     
     public panelGame() {
+        blastActive = false;
         initComponents();
         this.setFocusable(true);
         exitGame = false;
@@ -94,7 +96,12 @@ public class panelGame extends javax.swing.JPanel {
                         pl.move();
                     }
                 }
-
+                if(blastActive){
+                    gameSpace.getPlayer().ctrBlast-=5;
+                    if(gameSpace.getPlayer().ctrBlast <= 0){
+                        blastActive = false;
+                    }
+                }
                 ctrWaktu+= 0.05;
                 if (ctrWaktu >= 1) { //setiap 1 detik
                     gameSpace.nextStage();
@@ -224,6 +231,10 @@ public class panelGame extends javax.swing.JPanel {
         if(evt.getKeyCode() == KeyEvent.VK_ESCAPE){
             gameSpace.getSoundEffect("sfx/sfx_zap.wav");
             setPauseGame();
+        }
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER && gameSpace.getPlayer().ctrBlast == 100){
+            blastActive = true;
+            gameSpace.getPlayer().yBlast = 550;
         }
     }//GEN-LAST:event_formKeyPressed
 

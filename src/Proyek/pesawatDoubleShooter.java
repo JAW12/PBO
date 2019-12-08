@@ -9,8 +9,10 @@ import javax.imageio.ImageIO;
 
 public class pesawatDoubleShooter extends pesawatPlayer {
 
-    public pesawatDoubleShooter(int hp, int x, int y, int ctrPowerUp, String powerUP, ArrayList<peluru> peluru, int shield) {
+    public pesawatDoubleShooter(int hp, int x, int y, int ctrPowerUp, String powerUP, ArrayList<peluru> peluru, int shield, int ctrBlast, int yBlast) {
         super(hp, x, y);
+        this.ctrBlast = ctrBlast;
+        this.yBlast = yBlast;
         this.listPeluru = peluru;
         this.shieldActive = shield;
         this.ctrPowerUp = ctrPowerUp;
@@ -33,7 +35,7 @@ public class pesawatDoubleShooter extends pesawatPlayer {
     public pesawatPlayer evolve() {
         powerUP = "You got Evolved to Triple Shooter";
         ctrPowerUp = 25;
-        return new pesawatTripleShooter(hp, posX, posY, ctrPowerUp, powerUP, listPeluru, shieldActive);
+        return new pesawatTripleShooter(hp, posX, posY, ctrPowerUp, powerUP, listPeluru, shieldActive, ctrBlast, yBlast);
     }
     
     @Override

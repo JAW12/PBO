@@ -32,7 +32,7 @@ public class pesawatSingleShooter extends pesawatPlayer{
     public pesawatPlayer evolve() {
         powerUP = "You got Evolved to Double Shooter";
         ctrPowerUp = 25;
-        return new pesawatDoubleShooter(hp, posX, posY, ctrPowerUp, powerUP, listPeluru, shieldActive);
+        return new pesawatDoubleShooter(hp, posX, posY, ctrPowerUp, powerUP, listPeluru, shieldActive, ctrBlast, yBlast);
     }
 
     @Override

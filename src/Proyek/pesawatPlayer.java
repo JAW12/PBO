@@ -26,6 +26,9 @@ public abstract class pesawatPlayer extends pesawat{
     protected ArrayList<peluru> listPeluru;
     protected int damageNabrak;
     transient BufferedImage gbrShield;
+    transient BufferedImage gbrBlast;
+    protected int ctrBlast;
+    protected int yBlast;
     protected int ctrPowerUp;
     protected String powerUP;
     
@@ -33,6 +36,8 @@ public abstract class pesawatPlayer extends pesawat{
 
     public pesawatPlayer(int hp, int x, int y) {
         super(hp, x, y);
+        this.yBlast = 570;
+        this.ctrBlast = 0;
         this.ctrTembak = -1;
         this.damagePesawat = 20;
         this.damageNabrak = 50;
@@ -48,6 +53,7 @@ public abstract class pesawatPlayer extends pesawat{
             gbrLedak[1] = ImageIO.read(new File("images/expm2.png"));
             gbrLedak[2] = ImageIO.read(new File("images/expm3.png"));
             gbrLedak[3] = ImageIO.read(new File("images/expm4.png"));
+            gbrBlast = ImageIO.read(new File("images/blast.png"));
         } catch (IOException ex) {
             Logger.getLogger(pesawatMusuh.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -173,6 +179,10 @@ public abstract class pesawatPlayer extends pesawat{
         else if(ctrLedak >= 0 && ctrLedak <= 7 && temtab == 1){
             g2.drawImage(gbrLedak[ctrLedak / 2], posX-3, posY-3, width+7, height+7, null);
             ctrLedak++;
+        }
+        if(yBlast <= 550){
+            g2.drawImage(gbrBlast, -15, yBlast, 545, 25, null);
+            yBlast-=10;
         }
     }
     

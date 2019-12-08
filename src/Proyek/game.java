@@ -326,7 +326,12 @@ public class game implements Serializable{
         g2.setColor(Color.RED);
         g2.fillRect(45, 80, ((pesawatPlayer)this.player).hp, 10);
         g2.setColor(Color.WHITE);
-        g2.drawString("Hp : ", 5, 90);
+        g2.drawString("HP : ", 5, 90);
+        g2.drawString("MP : ", 5, 120);
+        g2.drawRect(45, 110, 100, 10);
+        g2.setColor(Color.CYAN);
+        g2.fillRect(45, 110, getPlayer().ctrBlast, 10);
+        g2.setColor(Color.WHITE);
         g2.drawString("Mode : " + this.gameMode, 325, 30);
         g2.drawString("Stage : " + this.stage, 325, 60);
         if(!((pesawatPlayer)this.player).powerUP.equals("")){
@@ -423,6 +428,10 @@ public class game implements Serializable{
                 }
                 this.listMusuh.remove(i);
                 this.score += 20;
+                getPlayer().ctrBlast += 10;
+                if(getPlayer().ctrBlast >= 100){
+                    getPlayer().ctrBlast = 100;
+                }
             }
         }
     }
