@@ -147,7 +147,7 @@ public class LoginPanel extends javax.swing.JPanel {
         g2.setFont(new Font("Arial", 1, 18));
         g2.setColor(Color.white);
         g2.drawString("Highscore : ", 160, 225);
-        g2.drawString(panelGame.namaHiScore + " - " +panelGame.scoreHiScore,170-panelGame.namaHiScore.length()-String.valueOf(panelGame.scoreHiScore).length(),250);
+        g2.drawString(panelGame.namaHiScore + " - " +panelGame.scoreHiScore,180-(panelGame.namaHiScore.length())*3-(String.valueOf(panelGame.scoreHiScore).length()*3),250);
     }
 
     /**
