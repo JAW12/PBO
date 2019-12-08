@@ -240,6 +240,7 @@ public class panelGame extends javax.swing.JPanel {
     private void btnPauseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPauseMouseClicked
         // TODO add your handling code here:
         gameSpace.getSoundEffect("sfx/sfx_zap.wav");
+        setUpMultipleKeyPressed();
         setPauseGame();    
     }//GEN-LAST:event_btnPauseMouseClicked
 
