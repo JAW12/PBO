@@ -279,10 +279,6 @@ public class panelGame extends javax.swing.JPanel {
                 gameSpace.getPlayer().ctrTembak = 3;
             }
         }
-//        if (Keyboard.isPressed(KeyEvent.VK_ESCAPE)) {
-//            gameSpace.getSoundEffect("sfx/sfx_zap.wav");
-//            setPauseGame();
-//        }    
         repaint();
     }
     
